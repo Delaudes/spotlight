@@ -1,6 +1,6 @@
 export interface HomeViewModel {
-    title: string;
-    subtitle: string;
-    gameRules: string;
-    playButtonLabel: string;
+    readonly title: string;
+    readonly subtitle: string;
+    readonly gameRules: string;
+    readonly playButtonLabel: string;
 }

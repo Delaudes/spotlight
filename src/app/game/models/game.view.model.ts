@@ -1,7 +1,7 @@
 export interface GameViewModel {
-    title: string;
-    subtitle: string;
-    congratulations: string;
+    readonly title: string;
+    readonly subtitle: string;
+    readonly congratulations: string;
 
     grid: CellViewModel[][];
     spotlight: boolean
@@ -11,7 +11,7 @@ export interface GameViewModel {
 
 
 export interface CellViewModel {
-    x: number;
-    y: number;
+    readonly x: number;
+    readonly y: number;
     lightOn: boolean;
 }
