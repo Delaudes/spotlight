@@ -5,6 +5,7 @@ export interface GameViewModel {
 
     grid: CellViewModel[][];
     spotlight: boolean
+    gridSize: number;
     gridSizes: number[];
 }
 

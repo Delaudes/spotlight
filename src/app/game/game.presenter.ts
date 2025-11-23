@@ -22,6 +22,7 @@ export class GamePresenter {
         this.gameView.gameViewModel.update((current) => ({
             ...current,
             grid: this.gameView.createGrid(size),
+            gridSize: size,
             spotlight: false
         }));
     }

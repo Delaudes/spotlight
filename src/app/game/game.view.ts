@@ -10,6 +10,7 @@ export class GameView {
 
             grid: this.createGrid(3),
             spotlight: false,
+            gridSize: 3,
             gridSizes: [3, 4, 5, 6, 7]
         })
     }

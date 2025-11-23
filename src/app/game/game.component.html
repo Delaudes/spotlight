@@ -21,14 +21,14 @@
       @for (size of viewModel.gridSizes; track size) {
       <button
         class="w-12 h-12 rounded-full font-semibold transition-colors border"
-        [class.bg-cyan-400]="viewModel.grid.length === size"
-        [class.text-black]="viewModel.grid.length === size"
-        [class.border-cyan-400]="viewModel.grid.length === size"
-        [class.bg-gray-900]="viewModel.grid.length !== size"
-        [class.text-cyan-400]="viewModel.grid.length !== size"
-        [class.border-cyan-400/20]="viewModel.grid.length !== size"
-        [class.hover:bg-cyan-300]="viewModel.grid.length === size"
-        [class.hover:border-cyan-400/40]="viewModel.grid.length !== size"
+        [class.bg-cyan-400]="viewModel.gridSize === size"
+        [class.text-black]="viewModel.gridSize === size"
+        [class.border-cyan-400]="viewModel.gridSize === size"
+        [class.bg-gray-900]="viewModel.gridSize !== size"
+        [class.text-cyan-400]="viewModel.gridSize !== size"
+        [class.border-cyan-400/20]="viewModel.gridSize !== size"
+        [class.hover:bg-cyan-300]="viewModel.gridSize === size"
+        [class.hover:border-cyan-400/40]="viewModel.gridSize !== size"
         (click)="gameController.chooseGridSize(size)"
       >
         {{ size }}
@@ -46,7 +46,7 @@
           [class.bg-gray-900]="!cell.lightOn"
           [class.hover:bg-cyan-300]="cell.lightOn"
           [class.hover:bg-gray-800]="!cell.lightOn"
-          (click)="gameController.play(cell, viewModel.grid.length)"
+          (click)="gameController.play(cell, viewModel.gridSize)"
         ></button>
         }
       </div>
