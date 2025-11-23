@@ -1,11 +1,4 @@
 <div class="min-h-screen bg-black flex items-center justify-center p-4 relative">
-  <button
-    class="absolute bottom-8 left-8 sm:top-8 sm:bottom-auto text-gray-400 hover:text-cyan-400 transition-colors text-sm underline"
-    (click)="gameController.navigateToHome()"
-  >
-    ← {{ viewModel.homeLinkLabel }}
-  </button>
-
   <div class="w-full max-w-2xl space-y-12 flex flex-col items-center">
     <div class="text-center">
       <h1 class="text-6xl font-bold text-white">
@@ -16,17 +9,44 @@
       </p>
     </div>
 
+    @if (viewModel.spotlight) {
+    <div class="border border-cyan-400 rounded-2xl p-8 bg-cyan-400/5">
+      <p class="text-cyan-400 text-xl text-center font-semibold">
+        {{ viewModel.congratulations }}
+      </p>
+    </div>
+    }
+
+    <div class="flex gap-2">
+      @for (size of viewModel.gridSizes; track size) {
+      <button
+        class="w-12 h-12 rounded-full font-semibold transition-colors border"
+        [class.bg-cyan-400]="viewModel.grid.length === size"
+        [class.text-black]="viewModel.grid.length === size"
+        [class.border-cyan-400]="viewModel.grid.length === size"
+        [class.bg-gray-900]="viewModel.grid.length !== size"
+        [class.text-cyan-400]="viewModel.grid.length !== size"
+        [class.border-cyan-400/20]="viewModel.grid.length !== size"
+        [class.hover:bg-cyan-300]="viewModel.grid.length === size"
+        [class.hover:border-cyan-400/40]="viewModel.grid.length !== size"
+        (click)="gameController.chooseGridSize(size)"
+      >
+        {{ size }}
+      </button>
+      }
+    </div>
+
     <div class="grid gap-2 p-8 border border-cyan-400/20 rounded-2xl w-fit">
       @for (row of viewModel.grid; track $index) {
       <div class="flex gap-2">
         @for (cell of row; track cell.x + '-' + cell.y) {
         <button
-          (click)="gameController.play(cell, viewModel.grid.length)"
-          class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl transition-colors"
+          class="w-16 h-16 rounded-2xl transition-colors border border-cyan-400"
           [class.bg-cyan-400]="cell.lightOn"
           [class.bg-gray-900]="!cell.lightOn"
           [class.hover:bg-cyan-300]="cell.lightOn"
           [class.hover:bg-gray-800]="!cell.lightOn"
+          (click)="gameController.play(cell, viewModel.grid.length)"
         ></button>
         }
       </div>

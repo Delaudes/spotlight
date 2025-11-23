@@ -1,8 +1,10 @@
 export interface GameViewModel {
     title: string;
     subtitle: string;
-    homeLinkLabel: string;
+    congratulations: string;
     grid: CellViewModel[][];
+    spotlight: boolean
+    gridSizes: number[];
 }
 
 

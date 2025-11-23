@@ -12,8 +12,17 @@ export class GamePresenter {
             }
             return {
                 ...current,
-                grid: newGrid
+                grid: newGrid,
+                spotlight: newGrid.flat().every(cell => cell.lightOn)
             };
         });
+    }
+
+    presentGridSize(size: number): void {
+        this.gameView.gameViewModel.update((current) => ({
+            ...current,
+            grid: this.gameView.createGrid(size),
+            spotlight: false
+        }));
     }
 }

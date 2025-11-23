@@ -1,14 +1,8 @@
-import { path } from "../app.routes";
-import { RouterService } from "../router/router.service";
 import { GamePresenter } from "./game.presenter";
 import { CellViewModel } from "./models/game.view.model";
 
 export class GameController {
-    constructor(private readonly routerService: RouterService, private readonly gamePresenter: GamePresenter) { }
-
-    navigateToHome(): void {
-        this.routerService.navigateTo(path.home);
-    }
+    constructor(private readonly gamePresenter: GamePresenter) { }
 
     play(cell: CellViewModel, gridSize: number) {
         const cellsToModify = [
@@ -23,5 +17,9 @@ export class GameController {
 
     private isValidCell(cell: { x: number, y: number }, gridSize: number): boolean {
         return cell.x >= 0 && cell.x < gridSize && cell.y >= 0 && cell.y < gridSize;
+    }
+
+    chooseGridSize(size: number) {
+        this.gamePresenter.presentGridSize(size);
     }
 }
