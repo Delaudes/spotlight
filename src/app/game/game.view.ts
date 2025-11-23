@@ -7,6 +7,7 @@ export class GameView {
             title: 'Spotlight',
             subtitle: 'Light Them All Up!',
             congratulations: 'Félicitations ! Vous avez allumé toute la grille !',
+
             grid: this.createGrid(3),
             spotlight: false,
             gridSizes: [3, 4, 5, 6, 7]

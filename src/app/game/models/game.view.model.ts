@@ -2,6 +2,7 @@ export interface GameViewModel {
     title: string;
     subtitle: string;
     congratulations: string;
+
     grid: CellViewModel[][];
     spotlight: boolean
     gridSizes: number[];
