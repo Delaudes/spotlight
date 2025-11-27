@@ -1,5 +1,7 @@
 <div class="min-h-screen bg-black flex items-center justify-center p-4">
   <div class="w-full max-w-2xl space-y-12 flex flex-col items-center">
+    
+    <!-- Title Section -->
     <div class="text-center">
       <h1 class="text-6xl font-bold text-white">
         {{ viewModel.title }}
@@ -9,50 +11,57 @@
       </p>
     </div>
 
-    @if (viewModel.spotlight) {
-    <div class="border border-cyan-400/20 rounded-2xl p-8 bg-cyan-400/5">
-      <p class="text-cyan-400 text-xl text-center font-semibold">
-        {{ viewModel.congratulations }}
-      </p>
-    </div>
-    }
-
+    <!-- Grid Size Selector -->
     <div class="flex gap-2">
       @for (size of viewModel.gridSizes; track size) {
-      <button
-        class="w-12 h-12 rounded-full font-semibold transition-colors border"
-        [class.bg-cyan-400]="viewModel.gridSize === size"
-        [class.text-black]="viewModel.gridSize === size"
-        [class.border-cyan-400]="viewModel.gridSize === size"
-        [class.hover:bg-cyan-300]="viewModel.gridSize === size"
-        [class.bg-gray-900]="viewModel.gridSize !== size"
-        [class.text-cyan-400]="viewModel.gridSize !== size"
-        [class.border-cyan-400/20]="viewModel.gridSize !== size"
-        [class.hover:bg-gray-800]="viewModel.gridSize !== size"
-        (click)="gameController.chooseGridSize(size)"
-      >
-        {{ size }}
-      </button>
+        <button
+          class="w-12 h-12 rounded-full font-semibold transition-colors border"
+          [class.bg-cyan-400]="viewModel.gridSize === size"
+          [class.text-black]="viewModel.gridSize === size"
+          [class.border-cyan-400]="viewModel.gridSize === size"
+          [class.hover:bg-cyan-300]="viewModel.gridSize === size"
+          [class.bg-gray-900]="viewModel.gridSize !== size"
+          [class.text-cyan-400]="viewModel.gridSize !== size"
+          [class.border-cyan-400/20]="viewModel.gridSize !== size"
+          [class.hover:bg-gray-800]="viewModel.gridSize !== size"
+          (click)="gameController.chooseGridSize(size)"
+        >
+          {{ size }}
+        </button>
       }
     </div>
 
+    <!-- Game Board -->
     <div class="flex flex-col gap-2 p-8 border border-cyan-400/20 rounded-2xl w-full max-w-lg bg-cyan-400/5">
-      @for (row of viewModel.grid; track $index) {
-      <div class="flex gap-2 w-full">
-        @for (cell of row; track cell.x + '-' + cell.y) {
-        <button
-          class="flex-1 aspect-square rounded-2xl transition-colors border"
-          [class.bg-cyan-400]="cell.lightOn"
-          [class.border-cyan-400]="cell.lightOn"
-          [class.hover:bg-cyan-300]="cell.lightOn"
-          [class.bg-gray-800]="!cell.lightOn"
-          [class.border-gray-600]="!cell.lightOn"
-          [class.hover:bg-gray-700]="!cell.lightOn"
-          (click)="gameController.play(cell, viewModel.gridSize)"
-        ></button>
+      
+      <!-- Victory Message -->
+      @if (viewModel.spotlight) {
+        <p class="text-cyan-400 text-xl text-center font-semibold">
+          {{ viewModel.congratulations }}
+        </p>
+      } 
+      
+      <!-- Game Grid -->
+      @else {
+        @for (row of viewModel.grid; track $index) {
+          <div class="flex gap-2 w-full">
+            @for (cell of row; track cell.x + '-' + cell.y) {
+              <button
+                class="flex-1 aspect-square rounded-2xl transition-colors border"
+                [class.bg-cyan-400]="cell.lightOn"
+                [class.border-cyan-400]="cell.lightOn"
+                [class.hover:bg-cyan-300]="cell.lightOn"
+                [class.bg-gray-800]="!cell.lightOn"
+                [class.border-gray-600]="!cell.lightOn"
+                [class.hover:bg-gray-700]="!cell.lightOn"
+                (click)="gameController.play(cell, viewModel.gridSize)"
+              ></button>
+            }
+          </div>
         }
-      </div>
       }
+
     </div>
+
   </div>
 </div>
