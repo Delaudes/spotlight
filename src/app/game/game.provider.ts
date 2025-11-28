@@ -1,6 +1,7 @@
 import { AngularSignalService } from "../signal/angular-signal.service";
 import { GameController } from "./game.controller";
 import { GamePresenter } from "./game.presenter";
+import { GameService } from "./game.service";
 import { GameView } from "./game.view";
 import { GameViewModel } from "./models/game.view.model";
 
@@ -11,10 +12,14 @@ export const GAME_PROVIDER = [
     },
     {
         provide: GameController,
-        deps: [GamePresenter]
+        deps: [GameService]
     },
     {
         provide: GamePresenter,
         deps: [GameView]
     },
+    {
+        provide: GameService,
+        deps: [GamePresenter]
+    }
 ];

@@ -27,6 +27,14 @@ describe('GameComponent', () => {
     });
   });
 
+  it('should have light mode selector', () => {
+    spectator.click('[data-testid="light-mode-Triple"]');
+
+    winGridSize3ModeTriple();
+
+    expect(spectator.query('[data-testid="victory-message"]')?.textContent).toContain('Félicitations ! Vous avez allumé toute la grille !');
+  })
+
   it('should have victory message', () => {
     expect(spectator.query('[data-testid="victory-message"]')).toBeFalsy();
 
@@ -40,6 +48,14 @@ describe('GameComponent', () => {
     spectator.click('[data-testid-2="cell-0-2"]');
     spectator.click('[data-testid-2="cell-2-0"]');
     spectator.click('[data-testid-2="cell-2-2"]');
+    spectator.click('[data-testid-2="cell-1-1"]');
+  }
+
+  function winGridSize3ModeTriple() {
+    spectator.click('[data-testid-2="cell-0-1"]');
+    spectator.click('[data-testid-2="cell-1-0"]');
+    spectator.click('[data-testid-2="cell-1-2"]');
+    spectator.click('[data-testid-2="cell-2-1"]');
     spectator.click('[data-testid-2="cell-1-1"]');
   }
 });

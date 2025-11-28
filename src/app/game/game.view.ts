@@ -29,4 +29,11 @@ export class GameView {
         }
         return grid;
     }
+
+    update(game: Partial<GameViewModel>) {
+        this.gameViewModel.update((current) => ({
+            ...current,
+            ...game
+        }));
+    }
 }
