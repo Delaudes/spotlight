@@ -1,3 +1,5 @@
+import { LightMode } from "./light-mode.enum";
+
 export interface GameViewModel {
     readonly title: string;
     readonly subtitle: string;
@@ -7,11 +9,13 @@ export interface GameViewModel {
     spotlight: boolean
     gridSize: number;
     gridSizes: number[];
+    lightMode: LightMode;
+    lightModes: LightMode[];
 }
 
 
 export interface CellViewModel {
     readonly x: number;
     readonly y: number;
-    lightOn: boolean;
+    lightLevel: number;
 }

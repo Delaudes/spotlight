@@ -1,5 +1,6 @@
 import { GamePresenter } from "./game.presenter";
 import { CellViewModel } from "./models/game.view.model";
+import { LightMode } from "./models/light-mode.enum";
 
 export class GameController {
     constructor(private readonly gamePresenter: GamePresenter) { }
@@ -21,5 +22,9 @@ export class GameController {
 
     chooseGridSize(size: number) {
         this.gamePresenter.presentGridSize(size);
+    }
+
+    chooseLightMode(mode: LightMode) {
+        this.gamePresenter.presentLightMode(mode);
     }
 }
