@@ -5,8 +5,8 @@ import { LightMode } from "./models/light-mode.enum";
 export class GameService {
     constructor(private readonly gamePresenter: GamePresenter) { }
 
-    play(cell: CellDomainModel, gridSize: number) {
-        const cellsToModify = cell.getCellsToModify(gridSize)
+    play(cell: CellDomainModel) {
+        const cellsToModify = cell.getCellsToModify()
         this.gamePresenter.presentCells(cellsToModify);
     }
 

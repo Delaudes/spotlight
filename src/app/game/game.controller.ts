@@ -6,8 +6,8 @@ import { LightMode } from "./models/light-mode.enum";
 export class GameController {
     constructor(private readonly gameService: GameService) { }
 
-    play(cell: CellViewModel, gridSize: number) {
-        this.gameService.play(new CellDomainModel(cell.x, cell.y), gridSize);
+    play(cell: CellViewModel) {
+        this.gameService.play(new CellDomainModel(cell.x, cell.y));
     }
 
     chooseGridSize(size: number) {

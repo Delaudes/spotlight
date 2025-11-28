@@ -1,14 +1,14 @@
 import { GameView } from "./game.view";
-import { CellDomainModel } from "./models/game.domain.model";
+import { CellsListDomainModel } from "./models/game.domain.model";
 import { LightMode } from "./models/light-mode.enum";
 
 export class GamePresenter {
     constructor(private readonly gameView: GameView) { }
 
-    presentCells(cells: CellDomainModel[]): void {
+    presentCells(cellsList: CellsListDomainModel): void {
         const newGrid = this.gameView.gameViewModel.get().grid
         const maxLevel = this.gameView.gameViewModel.get().lightMode === LightMode.Double ? 1 : 2
-        for (const cell of cells) {
+        for (const cell of cellsList.getValidCells(newGrid.length)) {
             const targetCell = newGrid[cell.x][cell.y];
             targetCell.lightLevel = (targetCell.lightLevel + 1) % (maxLevel + 1)
         }
