@@ -14,7 +14,7 @@ export class GameComponent {
   private readonly gameView = inject(GameView);
   protected readonly gameController = inject(GameController);
 
-  get viewModel() {
+  protected get viewModel() {
     return this.gameView.gameViewModel.get();
   }
 }

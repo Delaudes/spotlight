@@ -2,7 +2,7 @@
   <div class="w-full max-w-2xl space-y-12 flex flex-col items-center">
     
     <!-- Title Section -->
-    <div class="text-center">
+    <div class="text-center" data-testid="title-section">
       <h1 class="text-6xl font-bold text-white">
         {{ viewModel.title }}
       </h1>
@@ -12,9 +12,9 @@
     </div>
 
     <!-- Grid Size Selector -->
-    <div class="flex gap-2">
+    <div class="flex gap-2" >
       @for (size of viewModel.gridSizes; track size) {
-        <button
+        <button [attr.data-testid]="'grid-size-' + size"
           class="w-12 h-12 rounded-full font-semibold transition-colors border"
           [class.bg-cyan-400]="viewModel.gridSize === size"
           [class.text-black]="viewModel.gridSize === size"
@@ -36,17 +36,17 @@
       
       <!-- Victory Message -->
       @if (viewModel.spotlight) {
-        <p class="text-cyan-400 text-xl text-center font-semibold">
+        <p class="text-cyan-400 text-xl text-center font-semibold" data-testid="victory-message">
           {{ viewModel.congratulations }}
         </p>
-      } 
+      }
       
       <!-- Game Grid -->
       @else {
         @for (row of viewModel.grid; track $index) {
           <div class="flex gap-2 w-full">
             @for (cell of row; track cell.x + '-' + cell.y) {
-              <button
+              <button data-testid="cell" [attr.data-testid-2]="'cell-' + cell.x + '-' + cell.y"
                 class="flex-1 aspect-square rounded-2xl transition-colors border"
                 [class.bg-cyan-400]="cell.lightOn"
                 [class.border-cyan-400]="cell.lightOn"
