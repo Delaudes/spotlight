@@ -112,4 +112,18 @@ describe('GameService', () => {
         expect(view.gameViewModel.get().grid.cells[0][1].lightLevel).toBe(2);
         expect(view.gameViewModel.get().grid.cells[1][0].lightLevel).toBe(2);
     })
+
+    it('should reset cell light level correctly', () => {
+        service.play(new GridDomainModel([
+            [new CellDomainModel(0, 0, 2), new CellDomainModel(0, 1, 2), new CellDomainModel(0, 2, 2)],
+            [new CellDomainModel(1, 0, 2), new CellDomainModel(1, 1, 2), new CellDomainModel(1, 2, 2)],
+            [new CellDomainModel(2, 0, 2), new CellDomainModel(2, 1, 2), new CellDomainModel(2, 2, 2)],
+        ], 2), new CellDomainModel(1, 1, 2));
+
+        expect(view.gameViewModel.get().grid.cells[1][1].lightLevel).toBe(0);
+        expect(view.gameViewModel.get().grid.cells[0][1].lightLevel).toBe(0);
+        expect(view.gameViewModel.get().grid.cells[1][0].lightLevel).toBe(0);
+        expect(view.gameViewModel.get().grid.cells[1][2].lightLevel).toBe(0);
+        expect(view.gameViewModel.get().grid.cells[2][1].lightLevel).toBe(0);
+    });
 });
