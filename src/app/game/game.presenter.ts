@@ -1,7 +1,6 @@
 import { GameView } from "./game.view";
 import { GridDomainModel } from "./models/game.domain.model";
-import { GridViewModel } from "./models/game.view.model";
-import { LightMode } from "./models/light-mode.enum";
+import { GridViewModel, LightMode } from "./models/game.view.model";
 
 export class GamePresenter {
     constructor(private readonly gameView: GameView) { }
@@ -25,8 +24,8 @@ export class GamePresenter {
             spotlight: gridDomain.isSpotlight(),
             size: gridDomain.cells.length,
             sizeOptions: [3, 4, 5, 6, 7],
-            lightMode: gridDomain.lightMode,
-            lightModeOptions: [LightMode.Double, LightMode.Triple]
+            lightMode: gridDomain.cellMaxLevel === 1 ? LightMode.CLASSIC : LightMode.EXOTIC,
+            lightModeOptions: [LightMode.CLASSIC, LightMode.EXOTIC]
         };
     }
 }

@@ -1,6 +1,5 @@
 import { SignalService } from "../signal/signal.service";
-import { GameViewModel, GridViewModel } from "./models/game.view.model";
-import { LightMode } from "./models/light-mode.enum";
+import { GameViewModel, GridViewModel, LightMode } from "./models/game.view.model";
 
 export class GameView {
     constructor(public readonly gameViewModel: SignalService<GameViewModel>) {
@@ -9,7 +8,7 @@ export class GameView {
             subtitle: 'Light Them All Up!',
             congratulations: 'Félicitations ! Vous avez allumé toute la grille !',
 
-            grid: this.createGrid(3, LightMode.Double),
+            grid: this.createGrid(3, LightMode.CLASSIC),
         })
     }
 
@@ -28,7 +27,7 @@ export class GameView {
             size: size,
             sizeOptions: [3, 4, 5, 6, 7],
             lightMode: mode,
-            lightModeOptions: [LightMode.Double, LightMode.Triple]
+            lightModeOptions: [LightMode.CLASSIC, LightMode.EXOTIC]
         };
     }
 

@@ -1,4 +1,3 @@
-import { LightMode } from "./light-mode.enum";
 
 export interface GameViewModel {
     readonly title: string;
@@ -23,3 +22,9 @@ export interface CellViewModel {
     readonly y: number;
     lightLevel: number;
 }
+
+export enum LightMode {
+    CLASSIC = 'Classique',
+    EXOTIC = 'Exotique'
+}
+

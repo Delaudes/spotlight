@@ -1,5 +1,6 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { GameComponent } from './game.component';
+import { LightMode } from './models/game.view.model';
 
 describe('GameComponent', () => {
   let spectator: Spectator<GameComponent>;
@@ -28,9 +29,9 @@ describe('GameComponent', () => {
   });
 
   it('should have light mode selector', () => {
-    spectator.click('[data-testid="light-mode-Triple"]');
+    spectator.click(`[data-testid="light-mode-${LightMode.EXOTIC}"]`);
 
-    winGridSize3ModeTriple();
+    winAlternativeGridSize3();
 
     expect(spectator.query('[data-testid="victory-message"]')?.textContent).toContain('Félicitations ! Vous avez allumé toute la grille !');
   })
@@ -51,7 +52,7 @@ describe('GameComponent', () => {
     spectator.click('[data-testid-2="cell-1-1"]');
   }
 
-  function winGridSize3ModeTriple() {
+  function winAlternativeGridSize3() {
     spectator.click('[data-testid-2="cell-0-1"]');
     spectator.click('[data-testid-2="cell-1-0"]');
     spectator.click('[data-testid-2="cell-1-2"]');

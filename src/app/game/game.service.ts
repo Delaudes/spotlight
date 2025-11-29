@@ -1,6 +1,5 @@
 import { GamePresenter } from "./game.presenter";
 import { CellDomainModel, GridDomainModel } from "./models/game.domain.model";
-import { LightMode } from "./models/light-mode.enum";
 
 export class GameService {
     constructor(private readonly gamePresenter: GamePresenter) { }
@@ -10,17 +9,17 @@ export class GameService {
         this.gamePresenter.presentGrid(gridDomain);
     }
 
-    chooseGridSize(size: number, mode: LightMode) {
-        const gridDomain = this.createEmptyGrid(size, mode);
+    chooseGridSize(size: number, cellMaxLevel: number) {
+        const gridDomain = this.createEmptyGrid(size, cellMaxLevel);
         this.gamePresenter.presentGrid(gridDomain);
     }
 
-    chooseLightMode(mode: LightMode, size: number) {
-        const gridDomain = this.createEmptyGrid(size, mode);
+    chooseLightMode(cellMaxLevel: number, size: number) {
+        const gridDomain = this.createEmptyGrid(size, cellMaxLevel);
         this.gamePresenter.presentGrid(gridDomain);
     }
 
-    private createEmptyGrid(size: number, mode: LightMode): GridDomainModel {
+    private createEmptyGrid(size: number, cellMaxLevel: number): GridDomainModel {
         const cells = [];
         for (let x = 0; x < size; x++) {
             const row = [];
@@ -29,6 +28,6 @@ export class GameService {
             }
             cells.push(row);
         }
-        return new GridDomainModel(cells, mode);
+        return new GridDomainModel(cells, cellMaxLevel);
     }
 }
