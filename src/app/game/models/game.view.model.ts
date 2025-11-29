@@ -5,12 +5,16 @@ export interface GameViewModel {
     readonly subtitle: string;
     readonly congratulations: string;
 
-    grid: CellViewModel[][];
-    spotlight: boolean
-    gridSize: number;
-    gridSizes: number[];
+    grid: GridViewModel
+}
+
+export interface GridViewModel {
+    cells: CellViewModel[][];
+    spotlight: boolean;
+    size: number;
     lightMode: LightMode;
-    lightModes: LightMode[];
+    sizeOptions: number[];
+    lightModeOptions: LightMode[];
 }
 
 

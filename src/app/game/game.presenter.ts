@@ -1,38 +1,32 @@
 import { GameView } from "./game.view";
-import { CellsListDomainModel } from "./models/game.domain.model";
+import { GridDomainModel } from "./models/game.domain.model";
+import { GridViewModel } from "./models/game.view.model";
 import { LightMode } from "./models/light-mode.enum";
 
 export class GamePresenter {
     constructor(private readonly gameView: GameView) { }
 
-    presentCells(cellsList: CellsListDomainModel): void {
-        const newGrid = this.gameView.gameViewModel.get().grid
-        const maxLevel = this.gameView.gameViewModel.get().lightMode === LightMode.Double ? 1 : 2
-        for (const cell of cellsList.getValidCells(newGrid.length)) {
-            const targetCell = newGrid[cell.x][cell.y];
-            targetCell.lightLevel = (targetCell.lightLevel + 1) % (maxLevel + 1)
-        }
-
-        this.gameView.update({
-            grid: newGrid,
-            spotlight: newGrid.flat().every(cell => cell.lightLevel === maxLevel)
-        });
+    presentGrid(gridDomain: GridDomainModel): void {
+        const gridViewModel = this.convertToGridViewModel(gridDomain);
+        this.gameView.update({ grid: gridViewModel });
     }
 
-    presentGridSize(size: number): void {
-        this.gameView.update({
-            grid: this.gameView.createGrid(size),
-            gridSize: size,
-            spotlight: false
-        });
-    }
+    private convertToGridViewModel(gridDomain: GridDomainModel): GridViewModel {
+        const cells = gridDomain.cells.map(row =>
+            row.map(cell => ({
+                x: cell.x,
+                y: cell.y,
+                lightLevel: cell.lightLevel
+            }))
+        );
 
-    presentLightMode(mode: LightMode): void {
-        const gridSize = this.gameView.gameViewModel.get().gridSize;
-        this.gameView.update({
-            lightMode: mode,
-            grid: this.gameView.createGrid(gridSize),
-            spotlight: false
-        });
+        return {
+            cells: cells,
+            spotlight: gridDomain.isSpotlight(),
+            size: gridDomain.cells.length,
+            sizeOptions: [3, 4, 5, 6, 7],
+            lightMode: gridDomain.lightMode,
+            lightModeOptions: [LightMode.Double, LightMode.Triple]
+        };
     }
 }

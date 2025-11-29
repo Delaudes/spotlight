@@ -1,5 +1,5 @@
 import { SignalService } from "../signal/signal.service";
-import { CellViewModel, GameViewModel } from "./models/game.view.model";
+import { GameViewModel, GridViewModel } from "./models/game.view.model";
 import { LightMode } from "./models/light-mode.enum";
 
 export class GameView {
@@ -9,25 +9,27 @@ export class GameView {
             subtitle: 'Light Them All Up!',
             congratulations: 'Félicitations ! Vous avez allumé toute la grille !',
 
-            grid: this.createGrid(3),
-            spotlight: false,
-            gridSize: 3,
-            gridSizes: [3, 4, 5, 6, 7],
-            lightMode: LightMode.Double,
-            lightModes: [LightMode.Double, LightMode.Triple]
+            grid: this.createGrid(3, LightMode.Double),
         })
     }
 
-    createGrid(size: number): CellViewModel[][] {
-        const grid = [];
+    createGrid(size: number, mode: LightMode): GridViewModel {
+        const cells = [];
         for (let x = 0; x < size; x++) {
             const row = [];
             for (let y = 0; y < size; y++) {
                 row.push({ x, y, lightLevel: 0 });
             }
-            grid.push(row);
+            cells.push(row);
         }
-        return grid;
+        return {
+            cells: cells,
+            spotlight: false,
+            size: size,
+            sizeOptions: [3, 4, 5, 6, 7],
+            lightMode: mode,
+            lightModeOptions: [LightMode.Double, LightMode.Triple]
+        };
     }
 
     update(game: Partial<GameViewModel>) {
