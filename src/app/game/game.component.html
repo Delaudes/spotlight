@@ -24,7 +24,7 @@
           [class.text-cyan-400]="viewModel.grid.size !== size"
           [class.border-cyan-400/20]="viewModel.grid.size !== size"
           [class.hover:bg-gray-800]="viewModel.grid.size !== size"
-          (click)="gameController.chooseGridSize(size, viewModel.grid.lightMode)"
+          (click)="gameController.modifyGrid(size, viewModel.grid.lightMode)"
         >
           {{ size }}
         </button>
@@ -44,7 +44,7 @@
           [class.text-cyan-400]="viewModel.grid.lightMode !== mode"
           [class.border-cyan-400/20]="viewModel.grid.lightMode !== mode"
           [class.hover:bg-gray-800]="viewModel.grid.lightMode !== mode"
-          (click)="gameController.chooseLightMode(mode, viewModel.grid.size)"
+          (click)="gameController.modifyGrid(viewModel.grid.size, mode)"
         >
           {{ mode }}
         </button>

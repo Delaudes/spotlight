@@ -11,12 +11,8 @@ export class GameController {
         this.gameService.play(gridDomain, cellDomain);
     }
 
-    chooseGridSize(size: number, currentMode: LightMode) {
-        this.gameService.chooseGridSize(size, currentMode === LightMode.CLASSIC ? 1 : 2);
-    }
-
-    chooseLightMode(mode: LightMode, currentSize: number) {
-        this.gameService.chooseLightMode(mode === LightMode.CLASSIC ? 1 : 2, currentSize);
+    modifyGrid(size: number, mode: LightMode) {
+        this.gameService.modifyGrid(size, mode === LightMode.CLASSIC ? 1 : 2);
     }
 
     private convertToGridDomain(gridView: GridViewModel): GridDomainModel {

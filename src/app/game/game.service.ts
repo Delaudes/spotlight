@@ -9,15 +9,11 @@ export class GameService {
         this.gamePresenter.presentGrid(gridDomain);
     }
 
-    chooseGridSize(size: number, cellMaxLevel: number) {
+    modifyGrid(size: number, cellMaxLevel: number) {
         const gridDomain = this.createEmptyGrid(size, cellMaxLevel);
         this.gamePresenter.presentGrid(gridDomain);
     }
 
-    chooseLightMode(cellMaxLevel: number, size: number) {
-        const gridDomain = this.createEmptyGrid(size, cellMaxLevel);
-        this.gamePresenter.presentGrid(gridDomain);
-    }
 
     private createEmptyGrid(size: number, cellMaxLevel: number): GridDomainModel {
         const cells = [];

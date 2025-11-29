@@ -8,19 +8,19 @@ export interface GameViewModel {
 }
 
 export interface GridViewModel {
-    cells: CellViewModel[][];
-    spotlight: boolean;
-    size: number;
-    lightMode: LightMode;
-    sizeOptions: number[];
-    lightModeOptions: LightMode[];
+    readonly cells: CellViewModel[][];
+    readonly spotlight: boolean;
+    readonly size: number;
+    readonly lightMode: LightMode;
+    readonly sizeOptions: number[];
+    readonly lightModeOptions: LightMode[];
 }
 
 
 export interface CellViewModel {
     readonly x: number;
     readonly y: number;
-    lightLevel: number;
+    readonly lightLevel: number;
 }
 
 export enum LightMode {
