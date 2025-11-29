@@ -47,5 +47,4 @@ export class GridDomainModel {
         return x >= 0 && x < this.cells.length && y >= 0 && y < this.cells.length;
     }
 
-
 }

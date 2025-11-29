@@ -48,6 +48,27 @@
 - Forme pilule (`rounded-full`)
 - Grand padding pour faciliter le clic
 
+### Cellules de Jeu
+
+Les cellules du jeu utilisent 3 niveaux de lumière pour représenter l'état du jeu :
+
+```html
+<!-- Cellule éteinte (niveau 0) -->
+<button class="bg-gray-800 border-gray-600 hover:bg-gray-700"></button>
+
+<!-- Cellule partiellement allumée (niveau 1) -->
+<button class="bg-cyan-400/50 border-cyan-400/50 hover:bg-cyan-400/60"></button>
+
+<!-- Cellule complètement allumée (niveau 2) -->
+<button class="bg-cyan-400 border-cyan-400 hover:bg-cyan-300"></button>
+```
+
+- Coins très arrondis (`rounded-2xl`)
+- Aspect carré (`aspect-square`)
+- Transitions sur hover
+
+**Note** : C'est la seule exception à la règle "Éviter les multiples niveaux d'opacité", justifiée par la mécanique de jeu qui nécessite 3 états visuellement distincts.
+
 ### Cartes de Contenu
 
 ```html
@@ -119,7 +140,7 @@
 ❌ Couleurs vives autres que le cyan  
 ❌ Backgrounds avec images  
 ❌ Textures  
-❌ Multiple niveaux d'opacité
+❌ Multiple niveaux d'opacité (sauf cellules de jeu)
 
 ## À Privilégier
 
