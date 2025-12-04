@@ -1,20 +1,26 @@
 import { Routes } from '@angular/router';
 import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
+import { TrophiesComponent } from './trophies/trophies.component';
 
-export enum path {
-    home = '',
-    game = 'game'
+export enum Path {
+    Home = '',
+    Game = 'game',
+    Trophies = 'trophies'
 }
 
 
 export const routes: Routes = [
     {
-        path: path.home,
+        path: Path.Home,
         component: HomeComponent
     },
     {
-        path: path.game,
+        path: Path.Game,
         component: GameComponent
+    },
+    {
+        path: Path.Trophies,
+        component: TrophiesComponent
     }
 ];

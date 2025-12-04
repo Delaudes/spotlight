@@ -1,19 +1,19 @@
-
 export interface GameViewModel {
     readonly title: string;
     readonly subtitle: string;
     readonly congratulations: string;
-
-    grid: GridViewModel
+    readonly grid: GridViewModel;
+    readonly trophiesButtonLabel: string;
+    readonly homeButtonLabel: string;
 }
 
 export interface GridViewModel {
     readonly cells: CellViewModel[][];
     readonly spotlight: boolean;
     readonly size: number;
-    readonly lightMode: LightMode;
+    readonly lightMode: LightModeViewModel;
     readonly sizeOptions: number[];
-    readonly lightModeOptions: LightMode[];
+    readonly lightModeOptions: LightModeViewModel[];
 }
 
 
@@ -23,7 +23,7 @@ export interface CellViewModel {
     readonly lightLevel: number;
 }
 
-export enum LightMode {
+export enum LightModeViewModel {
     CLASSIC = 'Classique',
     EXOTIC = 'Exotique'
 }

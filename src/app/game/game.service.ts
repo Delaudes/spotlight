@@ -2,18 +2,18 @@ import { GamePresenter } from "./game.presenter";
 import { CellDomainModel, GridDomainModel } from "./models/game.domain.model";
 
 export class GameService {
-    constructor(private readonly gamePresenter: GamePresenter) { }
+    constructor(private readonly presenter: GamePresenter) { }
 
-    play(gridDomain: GridDomainModel, cellDomain: CellDomainModel) {
-        gridDomain.playCell(cellDomain);
-        this.gamePresenter.presentGrid(gridDomain);
+    play(grid: GridDomainModel, cell: CellDomainModel): GridDomainModel {
+        grid.play(cell);
+        this.presenter.presentGrid(grid);
+        return grid
     }
 
-    modifyGrid(size: number, cellMaxLevel: number) {
-        const gridDomain = this.createEmptyGrid(size, cellMaxLevel);
-        this.gamePresenter.presentGrid(gridDomain);
+    updateGrid(size: number, cellMaxLevel: number) {
+        const grid = this.createEmptyGrid(size, cellMaxLevel);
+        this.presenter.presentGrid(grid);
     }
-
 
     private createEmptyGrid(size: number, cellMaxLevel: number): GridDomainModel {
         const cells = [];

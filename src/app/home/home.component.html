@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-black flex items-center justify-center p-4">
   <div class="max-w-2xl space-y-12 text-center">
-    <!-- Title Section -->
+    <!-- Section titre -->
     <div data-testid="title-section">
       <h1 class="text-6xl font-bold text-white">
         {{ viewModel.title }}
@@ -10,18 +10,29 @@
       </p>
     </div>
 
-    <!-- Game Rules -->
+    <!-- Règles du jeu -->
     <p class="text-gray-300 border border-cyan-400/20 rounded-2xl p-8" data-testid="game-rules">
       {{ viewModel.gameRules }}
     </p>
 
-    <!-- Call to Action -->
-    <button
-      data-testid="play-button"
-      class="bg-cyan-400 hover:bg-cyan-300 text-black font-semibold px-12 py-4 rounded-full transition-colors"
-      (click)="homeController.navigateToGame()"
-    >
-      {{ viewModel.playButtonLabel }}
-    </button>
+    <!-- Boutons d'action -->
+    <div class="flex flex-col gap-4 items-center">
+      <button
+        data-testid="play-button"
+        class="flex items-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-black font-semibold px-12 py-4 rounded-full transition-colors"
+        (click)="controller.navigateToGame()"
+      >
+        <span class="material-symbols-outlined">play_arrow</span>
+        {{ viewModel.playButtonLabel }}
+      </button>
+      <button
+        data-testid="trophies-button"
+        class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-12 py-4 rounded-full transition-colors border border-cyan-400/20"
+        (click)="controller.navigateToTrophies()"
+      >
+        <span class="material-symbols-outlined">emoji_events</span>
+        {{ viewModel.trophiesButtonLabel }}
+      </button>
+    </div>
   </div>
 </div>

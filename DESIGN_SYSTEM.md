@@ -48,6 +48,29 @@
 - Forme pilule (`rounded-full`)
 - Grand padding pour faciliter le clic
 
+### Boutons Icône (compacts)
+
+```html
+<!-- Bouton icône primaire -->
+<button
+  class="w-12 h-12 flex items-center justify-center bg-cyan-400 hover:bg-cyan-300 text-black rounded-full transition-colors"
+>
+  <span class="material-symbols-outlined">play_arrow</span>
+</button>
+
+<!-- Bouton icône secondaire -->
+<button
+  class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20"
+>
+  <span class="material-symbols-outlined">home</span>
+</button>
+```
+
+- Taille fixe 48x48px (`w-12 h-12`)
+- Forme ronde (`rounded-full`)
+- Icône centrée
+- Utiliser pour la navigation secondaire
+
 ### Cellules de Jeu
 
 Les cellules du jeu utilisent 3 niveaux de lumière pour représenter l'état du jeu :
@@ -124,13 +147,52 @@ Les cellules du jeu utilisent 3 niveaux de lumière pour représenter l'état du
 - Pas d'icônes décoratives
 - Icônes fonctionnelles uniquement si nécessaire
 - Style simple et géométrique
+- Utiliser **Google Material Symbols Outlined**
+- Classe: `material-symbols-outlined`
+- Taille par défaut: 24px (intégrée dans le lien CDN)
+
+### Icônes utilisées
+
+| Icône | Nom            | Usage               |
+| ----- | -------------- | ------------------- |
+| ▶️    | `play_arrow`   | Bouton jouer        |
+| 🏆    | `emoji_events` | Bouton trophées     |
+| 🏠    | `home`         | Bouton accueil      |
+| 🎉    | `celebration`  | Message de victoire |
+
+### Exemple d'utilisation
+
+```html
+<span class="material-symbols-outlined">emoji_events</span>
+```
+
+### Boutons Secondaires (avec icône)
+
+```html
+<button
+  class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-12 py-4 rounded-full transition-colors border border-cyan-400/20"
+>
+  <span class="material-symbols-outlined">emoji_events</span>
+  Trophées
+</button>
+```
+
+- Fond gris foncé
+- Texte cyan pour cohérence
+- Bordure subtile cyan
+- Icône alignée avec le texte via `flex` et `gap-2`
 
 ## Responsive
 
 - **Mobile**: Design par défaut
 - **Desktop**: Même design, utilise l'espace avec `max-w-2xl`
-- Pas de breakpoints complexes
-- Le design doit fonctionner de 320px à 1920px sans classes responsive
+- Le design doit fonctionner de 320px à 1920px
+- Navigation unifiée : boutons icône compacts sous le titre
+
+### Navigation Responsive
+
+- **Mobile** : Barre de navigation fixe en bas de l'écran (`fixed bottom-0`)
+- **Desktop** : Boutons positionnés à côté du titre (`absolute left-0` / `right-0`)
 
 ## À Éviter
 

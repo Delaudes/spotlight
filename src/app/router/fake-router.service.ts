@@ -1,9 +1,9 @@
 import { RouterService } from "./router.service";
 
 export class FakeRouterService implements RouterService {
-    path?: string;
+    lastNavigatedPath?: string;
 
     navigateTo(path: string): void {
-        this.path = path;
+        this.lastNavigatedPath = path;
     }
 }

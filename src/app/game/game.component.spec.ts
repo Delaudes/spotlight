@@ -1,15 +1,33 @@
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { FakeRouterService } from '../router/fake-router.service';
+import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
+import { FakeStorageService } from '../storage/fake-storage.service';
+import { STORAGE_SERVICE_TOKEN } from '../storage/storage.service';
+import { TROPHIES_PROVIDER } from '../trophies/trophies.provider';
 import { GameComponent } from './game.component';
-import { LightMode } from './models/game.view.model';
+import { GAME_PROVIDER } from './game.provider';
+import { LightModeViewModel } from './models/game.view.model';
 
 describe('GameComponent', () => {
   let spectator: Spectator<GameComponent>;
+  let router: FakeRouterService;
 
   const createComponent = createComponentFactory({
     component: GameComponent,
+    providers: [GAME_PROVIDER, TROPHIES_PROVIDER,
+      {
+        provide: STORAGE_SERVICE_TOKEN,
+        useClass: FakeStorageService
+      },
+      {
+        provide: ROUTER_SERVICE_TOKEN,
+        useFactory: () => router
+      }
+    ],
   });
 
   beforeEach(() => {
+    router = new FakeRouterService();
     spectator = createComponent();
   });
 
@@ -29,7 +47,7 @@ describe('GameComponent', () => {
   });
 
   it('should have light mode selector', () => {
-    spectator.click(`[data-testid="light-mode-${LightMode.EXOTIC}"]`);
+    spectator.click(`[data-testid="light-mode-${LightModeViewModel.EXOTIC}"]`);
 
     winAlternativeGridSize3();
 
@@ -43,6 +61,20 @@ describe('GameComponent', () => {
 
     expect(spectator.query('[data-testid="victory-message"]')?.textContent).toContain('Félicitations ! Vous avez allumé toute la grille !');
   })
+
+  it('should have trophies button', () => {
+    spectator.click('[data-testid="trophies-button"]');
+
+    expect(router.lastNavigatedPath).toEqual('trophies');
+    expect(spectator.query('[data-testid="trophies-button"]')?.textContent).toContain('Trophées');
+  });
+
+  it('should have home button', () => {
+    spectator.click('[data-testid="home-button"]');
+
+    expect(router.lastNavigatedPath).toEqual('');
+    expect(spectator.query('[data-testid="home-button"]')?.textContent).toContain('Accueil');
+  });
 
   function winGridSize3() {
     spectator.click('[data-testid-2="cell-0-0"]');

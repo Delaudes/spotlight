@@ -3,4 +3,5 @@ export interface HomeViewModel {
     readonly subtitle: string;
     readonly gameRules: string;
     readonly playButtonLabel: string;
+    readonly trophiesButtonLabel: string;
 }

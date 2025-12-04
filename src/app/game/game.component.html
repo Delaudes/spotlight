@@ -1,14 +1,37 @@
-<div class="min-h-screen bg-black flex items-center justify-center p-4">
+<div class="min-h-screen bg-black flex items-center justify-center p-4 pb-24 md:pb-4">
   <div class="w-full max-w-2xl space-y-12 flex flex-col items-center">
     
-    <!-- Title Section -->
-    <div class="text-center" data-testid="title-section">
-      <h1 class="text-6xl font-bold text-white">
-        {{ viewModel.title }}
-      </h1>
-      <p class="text-2xl text-cyan-400 mt-3">
-        {{ viewModel.subtitle }}
-      </p>
+    <!-- Title Section with Navigation -->
+    <div class="relative w-full flex items-center justify-center">
+      <!-- Home Button - Desktop -->
+      <button
+        data-testid="home-button"
+        class="hidden md:flex absolute left-0 items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+        (click)="controller.navigateToHome()"
+      >
+        <span class="material-symbols-outlined">home</span>
+        {{ viewModel.homeButtonLabel }}
+      </button>
+
+      <!-- Title -->
+      <div class="text-center" data-testid="title-section">
+        <h1 class="text-6xl font-bold text-white">
+          {{ viewModel.title }}
+        </h1>
+        <p class="text-2xl text-cyan-400 mt-3">
+          {{ viewModel.subtitle }}
+        </p>
+      </div>
+
+      <!-- Trophies Button - Desktop -->
+      <button
+        data-testid="trophies-button"
+        class="hidden md:flex absolute right-0 items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+        (click)="controller.navigateToTrophies()"
+      >
+        <span class="material-symbols-outlined">emoji_events</span>
+        {{ viewModel.trophiesButtonLabel }}
+      </button>
     </div>
 
     <!-- Grid Size Selector -->
@@ -24,7 +47,7 @@
           [class.text-cyan-400]="viewModel.grid.size !== size"
           [class.border-cyan-400/20]="viewModel.grid.size !== size"
           [class.hover:bg-gray-800]="viewModel.grid.size !== size"
-          (click)="gameController.modifyGrid(size, viewModel.grid.lightMode)"
+          (click)="controller.updateGrid(size, viewModel.grid.lightMode)"
         >
           {{ size }}
         </button>
@@ -44,7 +67,7 @@
           [class.text-cyan-400]="viewModel.grid.lightMode !== mode"
           [class.border-cyan-400/20]="viewModel.grid.lightMode !== mode"
           [class.hover:bg-gray-800]="viewModel.grid.lightMode !== mode"
-          (click)="gameController.modifyGrid(viewModel.grid.size, mode)"
+          (click)="controller.updateGrid(viewModel.grid.size, mode)"
         >
           {{ mode }}
         </button>
@@ -56,7 +79,8 @@
       
       <!-- Victory Message -->
       @if (viewModel.grid.spotlight) {
-        <p class="text-cyan-400 text-xl text-center font-semibold" data-testid="victory-message">
+        <p class="flex items-center justify-center gap-2 text-cyan-400 text-xl text-center font-semibold" data-testid="victory-message">
+          <span class="material-symbols-outlined">celebration</span>
           {{ viewModel.congratulations }}
         </p>
       }
@@ -77,7 +101,7 @@
                 [class.bg-gray-800]="cell.lightLevel === 0"
                 [class.border-gray-600]="cell.lightLevel === 0"
                 [class.hover:bg-gray-700]="cell.lightLevel === 0"
-                (click)="gameController.play(viewModel.grid, cell)"
+                (click)="controller.play(viewModel.grid, cell)"
               ></button>
             }
           </div>
@@ -86,5 +110,25 @@
 
     </div>
 
+  </div>
+
+  <!-- Mobile Navigation - Fixed Bottom -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 flex justify-between p-4 bg-black border-t border-cyan-400/20">
+    <button
+      data-testid="home-button-mobile"
+      class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+      (click)="controller.navigateToHome()"
+    >
+      <span class="material-symbols-outlined">home</span>
+      {{ viewModel.homeButtonLabel }}
+    </button>
+    <button
+      data-testid="trophies-button-mobile"
+      class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+      (click)="controller.navigateToTrophies()"
+    >
+      <span class="material-symbols-outlined">emoji_events</span>
+      {{ viewModel.trophiesButtonLabel }}
+    </button>
   </div>
 </div>

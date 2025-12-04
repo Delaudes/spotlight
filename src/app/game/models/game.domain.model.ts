@@ -1,4 +1,3 @@
-
 export class CellDomainModel {
     constructor(
         public readonly x: number,
@@ -6,8 +5,8 @@ export class CellDomainModel {
         public lightLevel: number
     ) { }
 
-    evolve(maxLevel: number): void {
-        this.lightLevel = (this.lightLevel + 1) % (maxLevel + 1);
+    evolve(cellMaxLevel: number): void {
+        this.lightLevel = (this.lightLevel + 1) % (cellMaxLevel + 1);
     }
 }
 
@@ -17,7 +16,7 @@ export class GridDomainModel {
         public readonly cellMaxLevel: number
     ) { }
 
-    playCell(cell: CellDomainModel): void {
+    play(cell: CellDomainModel): void {
         const cellsToEvolve = this.getCellsToEvolve(cell);
 
         for (const cell of cellsToEvolve) {
@@ -30,7 +29,7 @@ export class GridDomainModel {
     }
 
     private getCellsToEvolve(cell: CellDomainModel): CellDomainModel[] {
-        const neighbors = [
+        const cellsToEvolve = [
             { x: cell.x, y: cell.y },
             { x: cell.x + 1, y: cell.y },
             { x: cell.x - 1, y: cell.y },
@@ -38,9 +37,9 @@ export class GridDomainModel {
             { x: cell.x, y: cell.y - 1 },
         ];
 
-        return neighbors
-            .filter(pos => this.isValidPosition(pos.x, pos.y))
-            .map(pos => this.cells[pos.x][pos.y]);
+        return cellsToEvolve
+            .filter(cell => this.isValidPosition(cell.x, cell.y))
+            .map(cell => this.cells[cell.x][cell.y]);
     }
 
     private isValidPosition(x: number, y: number): boolean {

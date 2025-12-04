@@ -1,17 +1,17 @@
 import { GameView } from "./game.view";
 import { GridDomainModel } from "./models/game.domain.model";
-import { GridViewModel, LightMode } from "./models/game.view.model";
+import { GridViewModel, LightModeViewModel } from "./models/game.view.model";
 
 export class GamePresenter {
-    constructor(private readonly gameView: GameView) { }
+    constructor(private readonly view: GameView) { }
 
     presentGrid(gridDomain: GridDomainModel): void {
-        const gridViewModel = this.convertToGridViewModel(gridDomain);
-        this.gameView.update({ grid: gridViewModel });
+        const gridView = this.convertToGridView(gridDomain);
+        this.view.update({ grid: gridView });
     }
 
-    private convertToGridViewModel(gridDomain: GridDomainModel): GridViewModel {
-        const cells = gridDomain.cells.map(row =>
+    private convertToGridView(gridDomain: GridDomainModel): GridViewModel {
+        const cellsView = gridDomain.cells.map(row =>
             row.map(cell => ({
                 x: cell.x,
                 y: cell.y,
@@ -20,12 +20,12 @@ export class GamePresenter {
         );
 
         return {
-            cells: cells,
+            cells: cellsView,
             spotlight: gridDomain.isSpotlight(),
             size: gridDomain.cells.length,
             sizeOptions: [3, 4, 5, 6, 7],
-            lightMode: gridDomain.cellMaxLevel === 1 ? LightMode.CLASSIC : LightMode.EXOTIC,
-            lightModeOptions: [LightMode.CLASSIC, LightMode.EXOTIC]
+            lightMode: gridDomain.cellMaxLevel === 1 ? LightModeViewModel.CLASSIC : LightModeViewModel.EXOTIC,
+            lightModeOptions: [LightModeViewModel.CLASSIC, LightModeViewModel.EXOTIC]
         };
     }
 }

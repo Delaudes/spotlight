@@ -1,4 +1,6 @@
+import { ROUTER_SERVICE_TOKEN } from "../router/router.service";
 import { AngularSignalService } from "../signal/angular-signal.service";
+import { TrophiesService } from "../trophies/trophies.service";
 import { GameController } from "./game.controller";
 import { GamePresenter } from "./game.presenter";
 import { GameService } from "./game.service";
@@ -12,7 +14,7 @@ export const GAME_PROVIDER = [
     },
     {
         provide: GameController,
-        deps: [GameService]
+        deps: [GameService, TrophiesService, ROUTER_SERVICE_TOKEN]
     },
     {
         provide: GamePresenter,

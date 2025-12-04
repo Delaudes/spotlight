@@ -2,23 +2,25 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { FakeRouterService } from '../router/fake-router.service';
 import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
 import { HomeComponent } from './home.component';
+import { HOME_PROVIDER } from './home.provider';
 
 describe('HomeComponent', () => {
   let spectator: Spectator<HomeComponent>;
-  let fakeRouterService: FakeRouterService;
+  let router: FakeRouterService;
 
   const createComponent = createComponentFactory({
     component: HomeComponent,
     providers: [
       {
         provide: ROUTER_SERVICE_TOKEN,
-        useFactory: () => fakeRouterService,
+        useFactory: () => router,
       },
+      HOME_PROVIDER
     ],
   });
 
   beforeEach(() => {
-    fakeRouterService = new FakeRouterService();
+    router = new FakeRouterService();
     spectator = createComponent();
   });
 
@@ -36,7 +38,14 @@ describe('HomeComponent', () => {
   it('should have play button', () => {
     spectator.click('[data-testid="play-button"]');
 
-    expect(fakeRouterService.path).toEqual('game');
+    expect(router.lastNavigatedPath).toEqual('game');
     expect(spectator.query('[data-testid="play-button"]')?.textContent).toContain('Jouer');
+  });
+
+  it('should have trophies button', () => {
+    spectator.click('[data-testid="trophies-button"]');
+
+    expect(router.lastNavigatedPath).toEqual('trophies');
+    expect(spectator.query('[data-testid="trophies-button"]')?.textContent).toContain('Trophées');
   });
 });
