@@ -1,6 +1,5 @@
 import { Path } from "../app.routes";
 import { RouterService } from "../router/router.service";
-import { TrophiesService } from "../trophies/trophies.service";
 import { GameService } from "./game.service";
 import { CellDomainModel, GridDomainModel } from "./models/game.domain.model";
 import { CellViewModel, GridViewModel, LightModeViewModel } from "./models/game.view.model";
@@ -8,7 +7,6 @@ import { CellViewModel, GridViewModel, LightModeViewModel } from "./models/game.
 export class GameController {
     constructor(
         private readonly gameService: GameService,
-        private readonly trophiesService: TrophiesService,
         private readonly routerService: RouterService
     ) { }
 
@@ -16,9 +14,9 @@ export class GameController {
         const gridDomain = this.convertToGridDomain(gridView);
         const cellDomain = new CellDomainModel(cellView.x, cellView.y, cellView.lightLevel);
         const newGridDomain = this.gameService.play(gridDomain, cellDomain);
-        const unlockedTrophyTitle = this.trophiesService.getUnlockedTrophyTitle(newGridDomain);
+        const unlockedTrophyTitle = this.gameService.getUnlockedTrophyTitle(newGridDomain);
         if (unlockedTrophyTitle) {
-            this.trophiesService.unlockTrophy(unlockedTrophyTitle);
+            this.gameService.unlockTrophy(unlockedTrophyTitle);
         }
     }
 

@@ -1,7 +1,6 @@
-import { CellDomainModel, GridDomainModel } from "../game/models/game.domain.model";
 import { FakeSignalService } from "../signal/fake-signal.service";
 import { FakeStorageService } from "../storage/fake-storage.service";
-import { TrophyTitleDomainModel } from "./models/trophies.domain.model";
+import { STORAGE_KEY, TrophyTitleDomainModel } from "./models/trophies.domain.model";
 import { TrophiesViewModel } from "./models/trophies.view.model";
 import { TrophiesPresenter } from "./trophies.presenter";
 import { TrophiesService } from "./trophies.service";
@@ -18,60 +17,6 @@ describe('TrophiesService', () => {
         service = new TrophiesService(storage, new TrophiesPresenter(view));
     });
 
-    it('should return trophy unlocked', () => {
-        const trophy = service.getUnlockedTrophyTitle(new GridDomainModel(
-            [
-                [new CellDomainModel(0, 0, 1), new CellDomainModel(0, 1, 1), new CellDomainModel(0, 2, 1)],
-                [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
-                [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
-            ], 1));
-
-        expect(trophy).toEqual(TrophyTitleDomainModel.BEGINNER)
-    });
-
-    it('should return no trophy', () => {
-        const trophy = service.getUnlockedTrophyTitle(new GridDomainModel(
-            [
-                [new CellDomainModel(0, 0, 1), new CellDomainModel(0, 1, 0), new CellDomainModel(0, 2, 1)],
-                [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
-                [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
-            ], 1));
-
-        expect(trophy).toBeUndefined();
-    });
-
-    it('should return no trophy already unlocked', () => {
-        service.unlockTrophy(TrophyTitleDomainModel.BEGINNER);
-
-        const trophy = service.getUnlockedTrophyTitle(new GridDomainModel(
-            [
-                [new CellDomainModel(0, 0, 1), new CellDomainModel(0, 1, 1), new CellDomainModel(0, 2, 1)],
-                [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
-                [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
-            ], 1));
-
-        expect(trophy).toBeUndefined();
-    });
-
-    it('should store unlocked trophy', () => {
-        const trophy = TrophyTitleDomainModel.BEGINNER;
-
-        service.unlockTrophy(trophy);
-
-        expect(storage.store.get('trophies')).toEqual([trophy]);
-    });
-
-    it('should add another unlocked trophy', () => {
-        const key = 'trophies';
-        const trophy = TrophyTitleDomainModel.BEGINNER;
-        const anotherTrophy = TrophyTitleDomainModel.INTERMEDIATE;
-        storage.setItem<TrophyTitleDomainModel[]>(key, [trophy]);
-
-        service.unlockTrophy(anotherTrophy);
-
-        expect(storage.store.get(key)).toEqual([trophy, anotherTrophy]);
-    })
-
     it('should load none trophies', () => {
         service.loadTrophies();
 
@@ -79,7 +24,7 @@ describe('TrophiesService', () => {
     })
 
     it('should load some trophies', () => {
-        storage.setItem<TrophyTitleDomainModel[]>('trophies', [
+        storage.setItem<TrophyTitleDomainModel[]>(STORAGE_KEY, [
             TrophyTitleDomainModel.BEGINNER,
             TrophyTitleDomainModel.INTERMEDIATE_EXOTIC
         ]);

@@ -7,14 +7,11 @@ import { TrophiesPresenter } from "./trophies.presenter";
 import { TrophiesService } from "./trophies.service";
 import { TrophiesView } from "./trophies.view";
 
+
 export const TROPHIES_PROVIDER = [
     {
         provide: TrophiesView,
         useFactory: () => new TrophiesView(new AngularSignalService<TrophiesViewModel>())
-    },
-    {
-        provide: TrophiesController,
-        deps: [TrophiesService, ROUTER_SERVICE_TOKEN]
     },
     {
         provide: TrophiesPresenter,
@@ -23,5 +20,10 @@ export const TROPHIES_PROVIDER = [
     {
         provide: TrophiesService,
         deps: [STORAGE_SERVICE_TOKEN, TrophiesPresenter]
-    }
+    },
+    {
+        provide: TrophiesController,
+        deps: [TrophiesService, ROUTER_SERVICE_TOKEN]
+    },
 ];
+

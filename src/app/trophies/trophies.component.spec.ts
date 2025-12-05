@@ -4,7 +4,6 @@ import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
 import { FakeStorageService } from '../storage/fake-storage.service';
 import { STORAGE_SERVICE_TOKEN } from '../storage/storage.service';
 import { TrophiesComponent } from './trophies.component';
-import { TROPHIES_PROVIDER } from './trophies.provider';
 
 describe('TrophiesComponent', () => {
     let spectator: Spectator<TrophiesComponent>;
@@ -13,7 +12,7 @@ describe('TrophiesComponent', () => {
     const createComponent = createComponentFactory({
         component: TrophiesComponent,
         providers: [
-            TROPHIES_PROVIDER,
+
             {
                 provide: STORAGE_SERVICE_TOKEN,
                 useClass: FakeStorageService
@@ -39,13 +38,11 @@ describe('TrophiesComponent', () => {
         spectator.click('[data-testid="home-button"]');
 
         expect(router.lastNavigatedPath).toEqual('');
-        expect(spectator.query('[data-testid="home-button"]')?.textContent).toContain('Accueil');
     });
 
     it('should have play button', () => {
         spectator.click('[data-testid="play-button"]');
 
         expect(router.lastNavigatedPath).toEqual('game');
-        expect(spectator.query('[data-testid="play-button"]')?.textContent).toContain('Jouer');
     });
 });

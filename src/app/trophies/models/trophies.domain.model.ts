@@ -21,6 +21,7 @@ export enum TrophyTitleDomainModel {
     MASTER_EXOTIC = 'MASTER_EXOTIC'
 }
 
+
 export const GRID_BY_TITLE = new Map<TrophyTitleDomainModel, GridDomainModel>(
     [
         [TrophyTitleDomainModel.BEGINNER, createSpotlightGrid(3, 1)],
@@ -52,3 +53,4 @@ function createSpotlightGrid(size: number, cellMaxLevel: number): GridDomainMode
     return new GridDomainModel(cells, cellMaxLevel);
 }
 
+export const STORAGE_KEY = 'trophies';

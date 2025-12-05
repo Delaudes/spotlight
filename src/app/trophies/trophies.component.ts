@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TrophiesController } from './trophies.controller';
+import { TROPHIES_PROVIDER } from './trophies.provider';
 import { TrophiesView } from './trophies.view';
 
 @Component({
   selector: 'app-trophies',
   imports: [],
+  providers: [TROPHIES_PROVIDER],
   templateUrl: './trophies.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

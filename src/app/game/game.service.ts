@@ -1,8 +1,14 @@
+import { StorageService } from "../storage/storage.service";
+import { STORAGE_KEY, TITLE_BY_GRID, TrophyTitleDomainModel } from "../trophies/models/trophies.domain.model";
 import { GamePresenter } from "./game.presenter";
 import { CellDomainModel, GridDomainModel } from "./models/game.domain.model";
 
 export class GameService {
-    constructor(private readonly presenter: GamePresenter) { }
+    constructor(
+        private readonly presenter: GamePresenter,
+        private readonly storage: StorageService
+    ) {
+    }
 
     play(grid: GridDomainModel, cell: CellDomainModel): GridDomainModel {
         grid.play(cell);
@@ -25,5 +31,24 @@ export class GameService {
             cells.push(row);
         }
         return new GridDomainModel(cells, cellMaxLevel);
+    }
+
+    getUnlockedTrophyTitle(grid: GridDomainModel): TrophyTitleDomainModel | undefined {
+        const titles = this.storage.getItem<TrophyTitleDomainModel[]>(STORAGE_KEY);
+        const unlockedTitle = TITLE_BY_GRID.get(JSON.stringify(grid))
+        if (titles?.find(title => title === unlockedTitle)) {
+            return undefined;
+        }
+        return unlockedTitle
+    }
+
+    unlockTrophy(trophyTitle: TrophyTitleDomainModel): void {
+        const titles = this.storage.getItem<TrophyTitleDomainModel[]>(STORAGE_KEY);
+        if (titles) {
+            titles.push(trophyTitle);
+            this.storage.setItem<TrophyTitleDomainModel[]>(STORAGE_KEY, titles);
+            return;
+        }
+        this.storage.setItem<TrophyTitleDomainModel[]>(STORAGE_KEY, [trophyTitle]);
     }
 }

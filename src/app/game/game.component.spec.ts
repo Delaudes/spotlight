@@ -3,9 +3,7 @@ import { FakeRouterService } from '../router/fake-router.service';
 import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
 import { FakeStorageService } from '../storage/fake-storage.service';
 import { STORAGE_SERVICE_TOKEN } from '../storage/storage.service';
-import { TROPHIES_PROVIDER } from '../trophies/trophies.provider';
 import { GameComponent } from './game.component';
-import { GAME_PROVIDER } from './game.provider';
 import { LightModeViewModel } from './models/game.view.model';
 
 describe('GameComponent', () => {
@@ -14,7 +12,7 @@ describe('GameComponent', () => {
 
   const createComponent = createComponentFactory({
     component: GameComponent,
-    providers: [GAME_PROVIDER, TROPHIES_PROVIDER,
+    providers: [
       {
         provide: STORAGE_SERVICE_TOKEN,
         useClass: FakeStorageService
@@ -37,6 +35,7 @@ describe('GameComponent', () => {
       'Light Them All Up!'
     );
   });
+
 
   it('should have grid size selector', () => {
     const gridSizes = [3, 4, 5, 6, 7];

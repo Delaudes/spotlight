@@ -2,7 +2,6 @@ import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { FakeRouterService } from '../router/fake-router.service';
 import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
 import { HomeComponent } from './home.component';
-import { HOME_PROVIDER } from './home.provider';
 
 describe('HomeComponent', () => {
   let spectator: Spectator<HomeComponent>;
@@ -14,8 +13,7 @@ describe('HomeComponent', () => {
       {
         provide: ROUTER_SERVICE_TOKEN,
         useFactory: () => router,
-      },
-      HOME_PROVIDER
+      }
     ],
   });
 

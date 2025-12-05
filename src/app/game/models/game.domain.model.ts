@@ -1,3 +1,4 @@
+
 export class CellDomainModel {
     constructor(
         public readonly x: number,
@@ -47,3 +48,4 @@ export class GridDomainModel {
     }
 
 }
+

@@ -1,4 +1,6 @@
 import { FakeSignalService } from "../signal/fake-signal.service";
+import { FakeStorageService } from "../storage/fake-storage.service";
+import { STORAGE_KEY, TrophyTitleDomainModel } from "../trophies/models/trophies.domain.model";
 import { GamePresenter } from "./game.presenter";
 import { GameService } from "./game.service";
 import { GameView } from "./game.view";
@@ -8,10 +10,12 @@ import { GameViewModel, LightModeViewModel } from "./models/game.view.model";
 describe('GameService', () => {
     let service: GameService;
     let view: GameView;
+    let storage: FakeStorageService;
 
     beforeEach(() => {
+        storage = new FakeStorageService();
         view = new GameView(new FakeSignalService<GameViewModel>());
-        service = new GameService(new GamePresenter(view));
+        service = new GameService(new GamePresenter(view), storage);
     });
 
     it('should update grid', () => {
@@ -139,5 +143,62 @@ describe('GameService', () => {
             [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
             [new CellDomainModel(2, 0, 0), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 0)],
         ], 1));
-    })
+    });
+
+    describe('getUnlockedTrophyTitle', () => {
+        it('should return trophy unlocked', () => {
+            const trophy = service.getUnlockedTrophyTitle(new GridDomainModel(
+                [
+                    [new CellDomainModel(0, 0, 1), new CellDomainModel(0, 1, 1), new CellDomainModel(0, 2, 1)],
+                    [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
+                    [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
+                ], 1));
+
+            expect(trophy).toEqual(TrophyTitleDomainModel.BEGINNER)
+        });
+
+        it('should return no trophy', () => {
+            const trophy = service.getUnlockedTrophyTitle(new GridDomainModel(
+                [
+                    [new CellDomainModel(0, 0, 1), new CellDomainModel(0, 1, 0), new CellDomainModel(0, 2, 1)],
+                    [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
+                    [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
+                ], 1));
+
+            expect(trophy).toBeUndefined();
+        });
+
+        it('should return no trophy already unlocked', () => {
+            service.unlockTrophy(TrophyTitleDomainModel.BEGINNER);
+
+            const trophy = service.getUnlockedTrophyTitle(new GridDomainModel(
+                [
+                    [new CellDomainModel(0, 0, 1), new CellDomainModel(0, 1, 1), new CellDomainModel(0, 2, 1)],
+                    [new CellDomainModel(1, 0, 1), new CellDomainModel(1, 1, 1), new CellDomainModel(1, 2, 1)],
+                    [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
+                ], 1));
+
+            expect(trophy).toBeUndefined();
+        });
+    });
+
+    describe('unlockTrophy', () => {
+        it('should store unlocked trophy', () => {
+            const trophy = TrophyTitleDomainModel.BEGINNER;
+
+            service.unlockTrophy(trophy);
+
+            expect(storage.store.get(STORAGE_KEY)).toEqual([trophy]);
+        });
+
+        it('should add another unlocked trophy', () => {
+            const trophy = TrophyTitleDomainModel.BEGINNER;
+            const anotherTrophy = TrophyTitleDomainModel.INTERMEDIATE;
+            storage.setItem<TrophyTitleDomainModel[]>(STORAGE_KEY, [trophy]);
+
+            service.unlockTrophy(anotherTrophy);
+
+            expect(storage.store.get(STORAGE_KEY)).toEqual([trophy, anotherTrophy]);
+        });
+    });
 });
