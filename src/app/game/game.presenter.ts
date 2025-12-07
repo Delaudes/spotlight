@@ -28,4 +28,12 @@ export class GamePresenter {
             lightModeOptions: [LightModeViewModel.CLASSIC, LightModeViewModel.EXOTIC]
         };
     }
+
+    presentUnlockedTrophy(): void {
+        const currentViewModel = this.view.viewModel.get();
+        this.view.update({
+            hasNewTrophies: true,
+            nbNewTrophies: currentViewModel.nbNewTrophies + 1
+        });
+    }
 }

@@ -9,6 +9,8 @@ export class GameView {
             congratulations: 'Félicitations ! Vous avez allumé toute la grille !',
             trophiesButtonLabel: 'Trophées',
             homeButtonLabel: 'Accueil',
+            hasNewTrophies: false,
+            nbNewTrophies: 0,
             grid: this.createGrid(3, LightModeViewModel.CLASSIC),
         })
     }

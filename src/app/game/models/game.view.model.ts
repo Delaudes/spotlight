@@ -5,6 +5,8 @@ export interface GameViewModel {
     readonly grid: GridViewModel;
     readonly trophiesButtonLabel: string;
     readonly homeButtonLabel: string;
+    readonly hasNewTrophies: boolean;
+    readonly nbNewTrophies: number;
 }
 
 export interface GridViewModel {

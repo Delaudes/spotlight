@@ -26,11 +26,16 @@
       <!-- Trophies Button - Desktop -->
       <button
         data-testid="trophies-button"
-        class="hidden md:flex absolute right-0 items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+        class="hidden md:flex absolute right-0 items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20 relative"
         (click)="controller.navigateToTrophies()"
       >
         <span class="material-symbols-outlined">emoji_events</span>
         {{ viewModel.trophiesButtonLabel }}
+        @if (viewModel.hasNewTrophies) {
+          <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
+            {{ viewModel.nbNewTrophies }}
+          </span>
+        }
       </button>
     </div>
 
@@ -79,7 +84,7 @@
       
       <!-- Victory Message -->
       @if (viewModel.grid.spotlight) {
-        <p class="flex items-center justify-center gap-2 text-cyan-400 text-xl text-center font-semibold" data-testid="victory-message">
+        <p class="flex flex-col items-center justify-center gap-2 text-cyan-400 text-xl text-center font-semibold" data-testid="victory-message">
           <span class="material-symbols-outlined">celebration</span>
           {{ viewModel.congratulations }}
         </p>
@@ -124,11 +129,16 @@
     </button>
     <button
       data-testid="trophies-button-mobile"
-      class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+      class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20 relative"
       (click)="controller.navigateToTrophies()"
     >
       <span class="material-symbols-outlined">emoji_events</span>
       {{ viewModel.trophiesButtonLabel }}
+      @if (viewModel.hasNewTrophies) {
+        <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
+          {{ viewModel.nbNewTrophies }}
+        </span>
+      }
     </button>
   </div>
 </div>

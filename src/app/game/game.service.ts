@@ -44,6 +44,7 @@ export class GameService {
 
     unlockTrophy(trophyTitle: TrophyTitleDomainModel): void {
         const titles = this.storage.getItem<TrophyTitleDomainModel[]>(STORAGE_KEY);
+        this.presenter.presentUnlockedTrophy()
         if (titles) {
             titles.push(trophyTitle);
             this.storage.setItem<TrophyTitleDomainModel[]>(STORAGE_KEY, titles);

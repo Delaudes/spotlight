@@ -191,6 +191,18 @@ describe('GameService', () => {
             expect(storage.store.get(STORAGE_KEY)).toEqual([trophy]);
         });
 
+        it('should display unlocked trophy', () => {
+            expect(view.viewModel.get().nbNewTrophies).toEqual(0);
+            expect(view.viewModel.get().hasNewTrophies).toBe(false);
+
+            const trophy = TrophyTitleDomainModel.BEGINNER;
+
+            service.unlockTrophy(trophy);
+
+            expect(view.viewModel.get().nbNewTrophies).toEqual(1);
+            expect(view.viewModel.get().hasNewTrophies).toBe(true);
+        })
+
         it('should add another unlocked trophy', () => {
             const trophy = TrophyTitleDomainModel.BEGINNER;
             const anotherTrophy = TrophyTitleDomainModel.INTERMEDIATE;
