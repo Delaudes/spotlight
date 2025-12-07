@@ -11,6 +11,36 @@
       </p>
     </div>
 
+    <!-- Desktop Navigation Buttons -->
+    <div class="hidden md:flex gap-4">
+      <button
+        data-testid="home-button"
+        class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20"
+        (click)="controller.navigateToHome()"
+      >
+        <span class="material-symbols-outlined">home</span>
+      </button>
+      <button
+        data-testid="reset-button"
+        class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20"
+        (click)="controller.updateGrid(viewModel.grid.size, viewModel.grid.lightMode)"
+      >
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+      <button
+        data-testid="trophies-button"
+        class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20 relative"
+        (click)="controller.navigateToTrophies()"
+      >
+        <span class="material-symbols-outlined">emoji_events</span>
+        @if (viewModel.hasNewTrophies) {
+          <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
+            {{ viewModel.nbNewTrophies }}
+          </span>
+        }
+      </button>
+    </div>
+
     <!-- Grid Size Selector -->
     <div class="flex gap-2" >
       @for (size of viewModel.grid.sizeOptions; track size) {
@@ -87,50 +117,30 @@
 
     </div>
 
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex gap-4">
-      <button
-        data-testid="home-button"
-        class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
-        (click)="controller.navigateToHome()"
-      >
-        <span class="material-symbols-outlined">home</span>
-        {{ viewModel.homeButtonLabel }}
-      </button>
-      <button
-        data-testid="trophies-button"
-        class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20 relative"
-        (click)="controller.navigateToTrophies()"
-      >
-        <span class="material-symbols-outlined">emoji_events</span>
-        {{ viewModel.trophiesButtonLabel }}
-        @if (viewModel.hasNewTrophies) {
-          <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
-            {{ viewModel.nbNewTrophies }}
-          </span>
-        }
-      </button>
-    </div>
-
   </div>
 
   <!-- Mobile Navigation - Fixed Bottom -->
   <div class="md:hidden fixed bottom-0 left-0 right-0 flex justify-center gap-4 p-4 bg-black border-t border-cyan-400/20">
     <button
       data-testid="home-button-mobile"
-      class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+      class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20"
       (click)="controller.navigateToHome()"
     >
       <span class="material-symbols-outlined">home</span>
-      {{ viewModel.homeButtonLabel }}
+    </button>
+    <button
+      data-testid="reset-button-mobile"
+      class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20"
+      (click)="controller.updateGrid(viewModel.grid.size, viewModel.grid.lightMode)"
+    >
+      <span class="material-symbols-outlined">refresh</span>
     </button>
     <button
       data-testid="trophies-button-mobile"
-      class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20 relative"
+      class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20 relative"
       (click)="controller.navigateToTrophies()"
     >
       <span class="material-symbols-outlined">emoji_events</span>
-      {{ viewModel.trophiesButtonLabel }}
       @if (viewModel.hasNewTrophies) {
         <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
           {{ viewModel.nbNewTrophies }}

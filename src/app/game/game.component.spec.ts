@@ -65,14 +65,26 @@ describe('GameComponent', () => {
     spectator.click('[data-testid="trophies-button"]');
 
     expect(router.lastNavigatedPath).toEqual('trophies');
-    expect(spectator.query('[data-testid="trophies-button"]')?.textContent).toContain('Trophées');
   });
 
   it('should have home button', () => {
     spectator.click('[data-testid="home-button"]');
 
     expect(router.lastNavigatedPath).toEqual('');
-    expect(spectator.query('[data-testid="home-button"]')?.textContent).toContain('Accueil');
+  });
+
+  it('should reset grid when clicking reset button', () => {
+    spectator.click('[data-testid-2="cell-0-0"]');
+    expect(spectator.queryAll('[data-testid="cell"]').some(cell =>
+      cell.classList.contains('bg-cyan-400/50')
+    )).toBe(true);
+
+    spectator.click('[data-testid="reset-button"]');
+
+    const cells = spectator.queryAll('[data-testid="cell"]');
+    cells.forEach(cell => {
+      expect(cell.classList.contains('bg-gray-800')).toBe(true);
+    });
   });
 
   function winGridSize3() {
