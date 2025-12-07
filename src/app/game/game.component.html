@@ -1,42 +1,14 @@
 <div class="min-h-screen bg-black flex items-center justify-center p-4 pb-24 md:pb-4">
   <div class="w-full max-w-2xl space-y-12 flex flex-col items-center">
     
-    <!-- Title Section with Navigation -->
-    <div class="relative w-full flex items-center justify-center">
-      <!-- Home Button - Desktop -->
-      <button
-        data-testid="home-button"
-        class="hidden md:flex absolute left-0 items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
-        (click)="controller.navigateToHome()"
-      >
-        <span class="material-symbols-outlined">home</span>
-        {{ viewModel.homeButtonLabel }}
-      </button>
-
-      <!-- Title -->
-      <div class="text-center" data-testid="title-section">
-        <h1 class="text-6xl font-bold text-white">
-          {{ viewModel.title }}
-        </h1>
-        <p class="text-2xl text-cyan-400 mt-3">
-          {{ viewModel.subtitle }}
-        </p>
-      </div>
-
-      <!-- Trophies Button - Desktop -->
-      <button
-        data-testid="trophies-button"
-        class="hidden md:flex absolute right-0 items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20 relative"
-        (click)="controller.navigateToTrophies()"
-      >
-        <span class="material-symbols-outlined">emoji_events</span>
-        {{ viewModel.trophiesButtonLabel }}
-        @if (viewModel.hasNewTrophies) {
-          <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
-            {{ viewModel.nbNewTrophies }}
-          </span>
-        }
-      </button>
+    <!-- Title Section -->
+    <div class="text-center" data-testid="title-section">
+      <h1 class="text-6xl font-bold text-white">
+        {{ viewModel.title }}
+      </h1>
+      <p class="text-2xl text-cyan-400 mt-3">
+        {{ viewModel.subtitle }}
+      </p>
     </div>
 
     <!-- Grid Size Selector -->
@@ -115,10 +87,35 @@
 
     </div>
 
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex gap-4">
+      <button
+        data-testid="home-button"
+        class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
+        (click)="controller.navigateToHome()"
+      >
+        <span class="material-symbols-outlined">home</span>
+        {{ viewModel.homeButtonLabel }}
+      </button>
+      <button
+        data-testid="trophies-button"
+        class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20 relative"
+        (click)="controller.navigateToTrophies()"
+      >
+        <span class="material-symbols-outlined">emoji_events</span>
+        {{ viewModel.trophiesButtonLabel }}
+        @if (viewModel.hasNewTrophies) {
+          <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
+            {{ viewModel.nbNewTrophies }}
+          </span>
+        }
+      </button>
+    </div>
+
   </div>
 
   <!-- Mobile Navigation - Fixed Bottom -->
-  <div class="md:hidden fixed bottom-0 left-0 right-0 flex justify-between p-4 bg-black border-t border-cyan-400/20">
+  <div class="md:hidden fixed bottom-0 left-0 right-0 flex justify-center gap-4 p-4 bg-black border-t border-cyan-400/20">
     <button
       data-testid="home-button-mobile"
       class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-semibold px-6 py-3 rounded-full transition-colors border border-cyan-400/20"
