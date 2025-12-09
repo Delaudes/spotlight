@@ -34,11 +34,11 @@ describe('GameService', () => {
 
         service.updateGrid(5, 2);
 
-        expect(view.viewModel.get().grid.size).toBe(5);
-        expect(view.viewModel.get().grid.cells.length).toBe(5);
-        expect(view.viewModel.get().grid.cells.flat().length).toBe(25);
-        expect(view.viewModel.get().grid.spotlight).toBe(false);
-        expect(view.viewModel.get().grid.lightMode).toBe(LightModeViewModel.EXOTIC);
+        expect(view.viewModel.get().grid.size).toEqual(5);
+        expect(view.viewModel.get().grid.cells.length).toEqual(5);
+        expect(view.viewModel.get().grid.cells.flat().length).toEqual(25);
+        expect(view.viewModel.get().grid.spotlight).toEqual(false);
+        expect(view.viewModel.get().grid.lightMode).toEqual(LightModeViewModel.EXOTIC);
     });
 
     it('should play cell : left and up neighbors not evolve', () => {
@@ -48,9 +48,9 @@ describe('GameService', () => {
             [new CellDomainModel(2, 0, 0), new CellDomainModel(2, 1, 0), new CellDomainModel(2, 2, 0)],
         ], 1), new CellDomainModel(0, 0, 0));
 
-        expect(view.viewModel.get().grid.cells[0][0].lightLevel).toBe(1);
-        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toBe(1);
-        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toBe(1);
+        expect(view.viewModel.get().grid.cells[0][0].lightLevel).toEqual(1);
+        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toEqual(1);
+        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toEqual(1);
     });
 
     it('should play cell : right and down neighbors not evolve', () => {
@@ -60,9 +60,9 @@ describe('GameService', () => {
             [new CellDomainModel(2, 0, 0), new CellDomainModel(2, 1, 0), new CellDomainModel(2, 2, 0)],
         ], 1), new CellDomainModel(2, 2, 0));
 
-        expect(view.viewModel.get().grid.cells[2][2].lightLevel).toBe(1);
-        expect(view.viewModel.get().grid.cells[2][1].lightLevel).toBe(1);
-        expect(view.viewModel.get().grid.cells[1][2].lightLevel).toBe(1);
+        expect(view.viewModel.get().grid.cells[2][2].lightLevel).toEqual(1);
+        expect(view.viewModel.get().grid.cells[2][1].lightLevel).toEqual(1);
+        expect(view.viewModel.get().grid.cells[1][2].lightLevel).toEqual(1);
     });
 
     it('should play cell : spotlight', () => {
@@ -85,10 +85,10 @@ describe('GameService', () => {
             [new CellDomainModel(2, 0, 1), new CellDomainModel(2, 1, 1), new CellDomainModel(2, 2, 1)],
         ], 1), new CellDomainModel(0, 0, 0));
 
-        expect(view.viewModel.get().grid.spotlight).toBe(true);
-        expect(view.viewModel.get().grid.cells[0][0].lightLevel).toBe(1);
-        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toBe(1);
-        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toBe(1);
+        expect(view.viewModel.get().grid.spotlight).toEqual(true);
+        expect(view.viewModel.get().grid.cells[0][0].lightLevel).toEqual(1);
+        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toEqual(1);
+        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toEqual(1);
     });
 
     it('should play cell : exotic spotlight', () => {
@@ -111,10 +111,10 @@ describe('GameService', () => {
             [new CellDomainModel(2, 0, 2), new CellDomainModel(2, 1, 2), new CellDomainModel(2, 2, 2)],
         ], 2), new CellDomainModel(0, 0, 1));
 
-        expect(view.viewModel.get().grid.spotlight).toBe(true);
-        expect(view.viewModel.get().grid.cells[0][0].lightLevel).toBe(2);
-        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toBe(2);
-        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toBe(2);
+        expect(view.viewModel.get().grid.spotlight).toEqual(true);
+        expect(view.viewModel.get().grid.cells[0][0].lightLevel).toEqual(2);
+        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toEqual(2);
+        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toEqual(2);
     })
 
     it('should reset cell light level correctly', () => {
@@ -124,11 +124,11 @@ describe('GameService', () => {
             [new CellDomainModel(2, 0, 2), new CellDomainModel(2, 1, 2), new CellDomainModel(2, 2, 2)],
         ], 2), new CellDomainModel(1, 1, 2));
 
-        expect(view.viewModel.get().grid.cells[1][1].lightLevel).toBe(0);
-        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toBe(0);
-        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toBe(0);
-        expect(view.viewModel.get().grid.cells[1][2].lightLevel).toBe(0);
-        expect(view.viewModel.get().grid.cells[2][1].lightLevel).toBe(0);
+        expect(view.viewModel.get().grid.cells[1][1].lightLevel).toEqual(0);
+        expect(view.viewModel.get().grid.cells[0][1].lightLevel).toEqual(0);
+        expect(view.viewModel.get().grid.cells[1][0].lightLevel).toEqual(0);
+        expect(view.viewModel.get().grid.cells[1][2].lightLevel).toEqual(0);
+        expect(view.viewModel.get().grid.cells[2][1].lightLevel).toEqual(0);
     });
 
     it('should return updated grid on play', () => {
@@ -193,14 +193,14 @@ describe('GameService', () => {
 
         it('should display unlocked trophy', () => {
             expect(view.viewModel.get().nbNewTrophies).toEqual(0);
-            expect(view.viewModel.get().hasNewTrophies).toBe(false);
+            expect(view.viewModel.get().hasNewTrophies).toEqual(false);
 
             const trophy = TrophyTitleDomainModel.BEGINNER;
 
             service.unlockTrophy(trophy);
 
             expect(view.viewModel.get().nbNewTrophies).toEqual(1);
-            expect(view.viewModel.get().hasNewTrophies).toBe(true);
+            expect(view.viewModel.get().hasNewTrophies).toEqual(true);
         })
 
         it('should add another unlocked trophy', () => {

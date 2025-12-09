@@ -1,0 +1,22 @@
+<div class="border border-cyan-400/20 rounded-2xl p-4 flex flex-col items-center justify-between gap-3 h-32">
+  <!-- Trophy Mini Grid (dots) -->
+  <div class="flex flex-col gap-0.5 flex-1 justify-center">
+    @for (row of trophy().grid; track $index) {
+      <div class="flex gap-0.5">
+        @for (cell of row; track cell.x + '-' + cell.y) {
+          <div data-testid="cell"
+            class="w-1.5 h-1.5 rounded-full"
+            [class.bg-cyan-400]="cell.lightLevel === 2"
+            [class.bg-cyan-400/50]="cell.lightLevel === 1"
+            [class.bg-gray-600]="cell.lightLevel === 0"
+          ></div>
+        }
+      </div>
+    }
+  </div>
+  
+  <!-- Trophy Title -->
+  <p class="text-cyan-400 text-center font-semibold text-xs" data-testid="trophy-title">
+    {{ trophy().title }}
+  </p>
+</div>

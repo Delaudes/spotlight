@@ -77,13 +77,13 @@ describe('GameComponent', () => {
     spectator.click('[data-testid-2="cell-0-0"]');
     expect(spectator.queryAll('[data-testid="cell"]').some(cell =>
       cell.classList.contains('bg-cyan-400/50')
-    )).toBe(true);
+    )).toEqual(true);
 
     spectator.click('[data-testid="reset-button"]');
 
     const cells = spectator.queryAll('[data-testid="cell"]');
     cells.forEach(cell => {
-      expect(cell.classList.contains('bg-gray-800')).toBe(true);
+      expect(cell.classList.contains('bg-gray-800')).toEqual(true);
     });
   });
 

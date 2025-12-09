@@ -6,5 +6,4 @@ Ce projet a été généré avec [Angular CLI](https://github.com/angular/angula
 
 # A faire
 
-tests composant trophies
 tests composant game - feature unlock trophy

@@ -4,6 +4,7 @@ export class FakeStorageService implements StorageService {
     store: Map<string, unknown> = new Map();
 
     setItem<T>(key: string, value: T): void {
+
         this.store.set(key, value);
     }
 
