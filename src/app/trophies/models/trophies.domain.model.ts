@@ -22,23 +22,22 @@ export enum TrophyTitleDomainModel {
 }
 
 
-export const GRID_BY_TITLE = new Map<TrophyTitleDomainModel, GridDomainModel>(
-    [
-        [TrophyTitleDomainModel.BEGINNER, createSpotlightGrid(3, 1)],
-        [TrophyTitleDomainModel.INTERMEDIATE, createSpotlightGrid(4, 1)],
-        [TrophyTitleDomainModel.ADVANCED, createSpotlightGrid(5, 1)],
-        [TrophyTitleDomainModel.EXPERT, createSpotlightGrid(6, 1)],
-        [TrophyTitleDomainModel.MASTER, createSpotlightGrid(7, 1)],
-        [TrophyTitleDomainModel.BEGINNER_EXOTIC, createSpotlightGrid(3, 2)],
-        [TrophyTitleDomainModel.INTERMEDIATE_EXOTIC, createSpotlightGrid(4, 2)],
-        [TrophyTitleDomainModel.ADVANCED_EXOTIC, createSpotlightGrid(5, 2)],
-        [TrophyTitleDomainModel.EXPERT_EXOTIC, createSpotlightGrid(6, 2)],
-        [TrophyTitleDomainModel.MASTER_EXOTIC, createSpotlightGrid(7, 2)]
-    ]
-);
+export const GRID_BY_TITLE: Record<TrophyTitleDomainModel, GridDomainModel> = {
+    [TrophyTitleDomainModel.BEGINNER]: createSpotlightGrid(3, 1),
+    [TrophyTitleDomainModel.INTERMEDIATE]: createSpotlightGrid(4, 1),
+    [TrophyTitleDomainModel.ADVANCED]: createSpotlightGrid(5, 1),
+    [TrophyTitleDomainModel.EXPERT]: createSpotlightGrid(6, 1),
+    [TrophyTitleDomainModel.MASTER]: createSpotlightGrid(7, 1),
+    [TrophyTitleDomainModel.BEGINNER_EXOTIC]: createSpotlightGrid(3, 2),
+    [TrophyTitleDomainModel.INTERMEDIATE_EXOTIC]: createSpotlightGrid(4, 2),
+    [TrophyTitleDomainModel.ADVANCED_EXOTIC]: createSpotlightGrid(5, 2),
+    [TrophyTitleDomainModel.EXPERT_EXOTIC]: createSpotlightGrid(6, 2),
+    [TrophyTitleDomainModel.MASTER_EXOTIC]: createSpotlightGrid(7, 2)
+};
+
 
 export const TITLE_BY_GRID = new Map<string, TrophyTitleDomainModel>(
-    Array.from(GRID_BY_TITLE.entries()).map(([trophyTitle, grid]) => [JSON.stringify(grid), trophyTitle])
+    Object.entries(GRID_BY_TITLE).map(([trophyTitle, grid]) => [JSON.stringify(grid), trophyTitle as TrophyTitleDomainModel])
 );
 
 function createSpotlightGrid(size: number, cellMaxLevel: number): GridDomainModel {

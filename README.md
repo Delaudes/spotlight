@@ -1,9 +1,16 @@
 # Spotlight
 
-Un jeu de puzzle minimaliste où vous devez allumer toutes les cellules d'une grille.
+FR : Un jeu de puzzle minimaliste où vous devez allumer toutes les cellules d'une grille.
+EN : A minimalist puzzle game where you need to light up all the cells in a grid.
 
-Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+FR :Vous pouvez jouer au jeu ici : https://delaudes.github.io/spotlight/
+EN : You can play the game here: https://delaudes.github.io/spotlight/
 
-# A faire
+# TODO
 
-tests composant game - feature unlock trophy
+1 : Testing - game.component.ts (partially done)
+2 : Testing - game-board.component.ts
+3 : Testing - grid-size-selector.component.ts
+4 : Testing - light-mode-selector.component.ts
+5 : Programming - add trophies
+6 : Programming - sort et filter trophies

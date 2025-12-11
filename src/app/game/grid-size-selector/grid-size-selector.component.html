@@ -1,0 +1,18 @@
+<div class="flex gap-2">
+  @for (size of viewModel.grid.sizeOptions; track size) {
+    <button [attr.data-testid]="'grid-size-' + size"
+      class="w-12 h-12 rounded-full font-semibold transition-colors border"
+      [class.bg-cyan-400]="viewModel.grid.size === size"
+      [class.text-black]="viewModel.grid.size === size"
+      [class.border-cyan-400]="viewModel.grid.size === size"
+      [class.hover:bg-cyan-300]="viewModel.grid.size === size"
+      [class.bg-gray-900]="viewModel.grid.size !== size"
+      [class.text-cyan-400]="viewModel.grid.size !== size"
+      [class.border-cyan-400/20]="viewModel.grid.size !== size"
+      [class.hover:bg-gray-800]="viewModel.grid.size !== size"
+      (click)="controller.updateGrid(size, viewModel.grid.lightMode)"
+    >
+      {{ size }}
+    </button>
+  }
+</div>

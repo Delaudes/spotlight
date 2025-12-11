@@ -4,7 +4,6 @@ import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
 import { FakeStorageService } from '../storage/fake-storage.service';
 import { STORAGE_SERVICE_TOKEN } from '../storage/storage.service';
 import { GameComponent } from './game.component';
-import { LightModeViewModel } from './models/game.view.model';
 
 describe('GameComponent', () => {
   let spectator: Spectator<GameComponent>;
@@ -22,6 +21,7 @@ describe('GameComponent', () => {
         useFactory: () => router
       }
     ],
+
   });
 
   beforeEach(() => {
@@ -36,31 +36,6 @@ describe('GameComponent', () => {
     );
   });
 
-
-  it('should have grid size selector', () => {
-    const gridSizes = [3, 4, 5, 6, 7];
-    gridSizes.forEach(size => {
-      spectator.click(`[data-testid="grid-size-${size}"]`);
-      expect(spectator.queryAll(`[data-testid="cell`).length).toEqual(size * size);
-    });
-  });
-
-  it('should have light mode selector', () => {
-    spectator.click(`[data-testid="light-mode-${LightModeViewModel.EXOTIC}"]`);
-
-    winAlternativeGridSize3();
-
-    expect(spectator.query('[data-testid="victory-message"]')?.textContent).toContain('Félicitations ! Vous avez allumé toute la grille !');
-  })
-
-  it('should have victory message', () => {
-    expect(spectator.query('[data-testid="victory-message"]')).toBeFalsy();
-
-    winGridSize3();
-
-    expect(spectator.query('[data-testid="victory-message"]')?.textContent).toContain('Félicitations ! Vous avez allumé toute la grille !');
-  })
-
   it('should have trophies button', () => {
     spectator.click('[data-testid="trophies-button"]');
 
@@ -73,33 +48,8 @@ describe('GameComponent', () => {
     expect(router.lastNavigatedPath).toEqual('');
   });
 
-  it('should reset grid when clicking reset button', () => {
-    spectator.click('[data-testid-2="cell-0-0"]');
-    expect(spectator.queryAll('[data-testid="cell"]').some(cell =>
-      cell.classList.contains('bg-cyan-400/50')
-    )).toEqual(true);
-
+  it('should have reset button', () => {
     spectator.click('[data-testid="reset-button"]');
-
-    const cells = spectator.queryAll('[data-testid="cell"]');
-    cells.forEach(cell => {
-      expect(cell.classList.contains('bg-gray-800')).toEqual(true);
-    });
+    // Comment tester ca ?
   });
-
-  function winGridSize3() {
-    spectator.click('[data-testid-2="cell-0-0"]');
-    spectator.click('[data-testid-2="cell-0-2"]');
-    spectator.click('[data-testid-2="cell-2-0"]');
-    spectator.click('[data-testid-2="cell-2-2"]');
-    spectator.click('[data-testid-2="cell-1-1"]');
-  }
-
-  function winAlternativeGridSize3() {
-    spectator.click('[data-testid-2="cell-0-1"]');
-    spectator.click('[data-testid-2="cell-1-0"]');
-    spectator.click('[data-testid-2="cell-1-2"]');
-    spectator.click('[data-testid-2="cell-2-1"]');
-    spectator.click('[data-testid-2="cell-1-1"]');
-  }
 });

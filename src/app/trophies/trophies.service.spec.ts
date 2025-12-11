@@ -1,7 +1,7 @@
 import { FakeSignalService } from "../signal/fake-signal.service";
 import { FakeStorageService } from "../storage/fake-storage.service";
 import { STORAGE_KEY, TrophyTitleDomainModel } from "./models/trophies.domain.model";
-import { TrophiesViewModel } from "./models/trophies.view.model";
+import { TrophiesViewModel, TrophyTitleViewModel } from "./models/trophies.view.model";
 import { TrophiesPresenter } from "./trophies.presenter";
 import { TrophiesService } from "./trophies.service";
 import { TrophiesView } from "./trophies.view";
@@ -33,7 +33,7 @@ describe('TrophiesService', () => {
 
         expect(view.viewModel.get().trophies).toEqual([
             {
-                title: 'Débutant',
+                title: TrophyTitleViewModel.BEGINNER,
                 grid: [
                     [{ x: 0, y: 0, lightLevel: 1 }, { x: 0, y: 1, lightLevel: 1 }, { x: 0, y: 2, lightLevel: 1 }],
                     [{ x: 1, y: 0, lightLevel: 1 }, { x: 1, y: 1, lightLevel: 1 }, { x: 1, y: 2, lightLevel: 1 }],
@@ -41,7 +41,7 @@ describe('TrophiesService', () => {
                 ]
             },
             {
-                title: 'Intermédiaire Exotique',
+                title: TrophyTitleViewModel.INTERMEDIATE_EXOTIC,
                 grid: [
                     [{ x: 0, y: 0, lightLevel: 2 }, { x: 0, y: 1, lightLevel: 2 }, { x: 0, y: 2, lightLevel: 2 }, { x: 0, y: 3, lightLevel: 2 }],
                     [{ x: 1, y: 0, lightLevel: 2 }, { x: 1, y: 1, lightLevel: 2 }, { x: 1, y: 2, lightLevel: 2 }, { x: 1, y: 3, lightLevel: 2 }],

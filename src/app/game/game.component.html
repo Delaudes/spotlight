@@ -1,6 +1,5 @@
 <div class="min-h-screen bg-black flex items-center justify-center p-4 pb-24 md:pb-4">
   <div class="w-full max-w-2xl space-y-12 flex flex-col items-center">
-    
     <!-- Title Section -->
     <div class="text-center" data-testid="title-section">
       <h1 class="text-6xl font-bold text-white">
@@ -34,93 +33,23 @@
       >
         <span class="material-symbols-outlined">emoji_events</span>
         @if (viewModel.hasNewTrophies) {
-          <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
-            {{ viewModel.nbNewTrophies }}
-          </span>
+        <span
+          class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full"
+        >
+          {{ viewModel.nbNewTrophies }}
+        </span>
         }
       </button>
     </div>
-
-    <!-- Grid Size Selector -->
-    <div class="flex gap-2" >
-      @for (size of viewModel.grid.sizeOptions; track size) {
-        <button [attr.data-testid]="'grid-size-' + size"
-          class="w-12 h-12 rounded-full font-semibold transition-colors border"
-          [class.bg-cyan-400]="viewModel.grid.size === size"
-          [class.text-black]="viewModel.grid.size === size"
-          [class.border-cyan-400]="viewModel.grid.size === size"
-          [class.hover:bg-cyan-300]="viewModel.grid.size === size"
-          [class.bg-gray-900]="viewModel.grid.size !== size"
-          [class.text-cyan-400]="viewModel.grid.size !== size"
-          [class.border-cyan-400/20]="viewModel.grid.size !== size"
-          [class.hover:bg-gray-800]="viewModel.grid.size !== size"
-          (click)="controller.updateGrid(size, viewModel.grid.lightMode)"
-        >
-          {{ size }}
-        </button>
-      }
-    </div>
-
-    <!-- Light Mode Selector -->
-    <div class="flex gap-2">
-      @for (mode of viewModel.grid.lightModeOptions; track mode) {
-        <button [attr.data-testid]="'light-mode-' + mode"
-          class="px-8 h-12 rounded-full font-semibold transition-colors border"
-          [class.bg-cyan-400]="viewModel.grid.lightMode === mode"
-          [class.text-black]="viewModel.grid.lightMode === mode"
-          [class.border-cyan-400]="viewModel.grid.lightMode === mode"
-          [class.hover:bg-cyan-300]="viewModel.grid.lightMode === mode"
-          [class.bg-gray-900]="viewModel.grid.lightMode !== mode"
-          [class.text-cyan-400]="viewModel.grid.lightMode !== mode"
-          [class.border-cyan-400/20]="viewModel.grid.lightMode !== mode"
-          [class.hover:bg-gray-800]="viewModel.grid.lightMode !== mode"
-          (click)="controller.updateGrid(viewModel.grid.size, mode)"
-        >
-          {{ mode }}
-        </button>
-      }
-    </div>
-
-    <!-- Game Board -->
-    <div class="flex flex-col gap-2 p-8 border border-cyan-400/20 rounded-2xl w-full max-w-lg">
-      
-      <!-- Victory Message -->
-      @if (viewModel.grid.spotlight) {
-        <p class="flex flex-col items-center justify-center gap-2 text-cyan-400 text-xl text-center font-semibold" data-testid="victory-message">
-          <span class="material-symbols-outlined">celebration</span>
-          {{ viewModel.congratulations }}
-        </p>
-      }
-      
-      <!-- Game Grid -->
-      @else {
-        @for (row of viewModel.grid.cells; track $index) {
-          <div class="flex gap-2 w-full">
-            @for (cell of row; track cell.x + '-' + cell.y) {
-              <button data-testid="cell" [attr.data-testid-2]="'cell-' + cell.x + '-' + cell.y"
-                class="flex-1 aspect-square rounded-2xl transition-colors border"
-                [class.bg-cyan-400]="cell.lightLevel === 2"
-                [class.border-cyan-400]="cell.lightLevel === 2"
-                [class.hover:bg-cyan-300]="cell.lightLevel === 2"
-                [class.bg-cyan-400/50]="cell.lightLevel === 1"
-                [class.border-cyan-400/50]="cell.lightLevel === 1"
-                [class.hover:bg-cyan-400/60]="cell.lightLevel === 1"
-                [class.bg-gray-800]="cell.lightLevel === 0"
-                [class.border-gray-600]="cell.lightLevel === 0"
-                [class.hover:bg-gray-700]="cell.lightLevel === 0"
-                (click)="controller.play(viewModel.grid, cell)"
-              ></button>
-            }
-          </div>
-        }
-      }
-
-    </div>
-
+    <app-grid-size-selector />
+    <app-light-mode-selector />
+    <app-game-board />
   </div>
 
   <!-- Mobile Navigation - Fixed Bottom -->
-  <div class="md:hidden fixed bottom-0 left-0 right-0 flex justify-center gap-4 p-4 bg-black border-t border-cyan-400/20">
+  <div
+    class="md:hidden fixed bottom-0 left-0 right-0 flex justify-center gap-4 p-4 bg-black border-t border-cyan-400/20"
+  >
     <button
       class="w-12 h-12 flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-cyan-400 rounded-full transition-colors border border-cyan-400/20"
       (click)="controller.navigateToHome()"
@@ -139,9 +68,11 @@
     >
       <span class="material-symbols-outlined">emoji_events</span>
       @if (viewModel.hasNewTrophies) {
-        <span class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full">
-          {{ viewModel.nbNewTrophies }}
-        </span>
+      <span
+        class="absolute -top-2 -right-2 bg-cyan-400 text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full"
+      >
+        {{ viewModel.nbNewTrophies }}
+      </span>
       }
     </button>
   </div>

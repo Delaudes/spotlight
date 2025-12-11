@@ -10,7 +10,7 @@ export class TrophiesService {
         const titles = this.storage.getItem<TrophyTitleDomainModel[]>(STORAGE_KEY);
         if (titles) {
             const trophiesList = new TrophiesListDomainModel(
-                titles.map(title => new TrophyDomainModel(title, GRID_BY_TITLE.get(title)!))
+                titles.map(title => new TrophyDomainModel(title, GRID_BY_TITLE[title]))
             );
             this.presenter.presentTrophies(trophiesList)
         }
