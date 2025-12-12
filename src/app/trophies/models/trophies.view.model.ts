@@ -12,6 +12,7 @@ export interface TrophiesViewModel {
 export interface TrophyViewModel {
     readonly title: TrophyTitleViewModel;
     readonly grid: CellViewModel[][];
+    readonly unlocked: boolean;
 }
 
 export enum TrophyTitleViewModel {

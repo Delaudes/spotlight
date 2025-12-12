@@ -17,13 +17,7 @@ describe('TrophiesService', () => {
         service = new TrophiesService(storage, new TrophiesPresenter(view));
     });
 
-    it('should load none trophies', () => {
-        service.loadTrophies();
-
-        expect(view.viewModel.get().trophies).toEqual([]);
-    })
-
-    it('should load some trophies', () => {
+    it('should load trophies', () => {
         storage.setItem<TrophyTitleDomainModel[]>(STORAGE_KEY, [
             TrophyTitleDomainModel.BEGINNER,
             TrophyTitleDomainModel.INTERMEDIATE_EXOTIC
@@ -32,23 +26,28 @@ describe('TrophiesService', () => {
         service.loadTrophies();
 
         expect(view.viewModel.get().trophies).toEqual([
-            {
-                title: TrophyTitleViewModel.BEGINNER,
-                grid: [
-                    [{ x: 0, y: 0, lightLevel: 1 }, { x: 0, y: 1, lightLevel: 1 }, { x: 0, y: 2, lightLevel: 1 }],
-                    [{ x: 1, y: 0, lightLevel: 1 }, { x: 1, y: 1, lightLevel: 1 }, { x: 1, y: 2, lightLevel: 1 }],
-                    [{ x: 2, y: 0, lightLevel: 1 }, { x: 2, y: 1, lightLevel: 1 }, { x: 2, y: 2, lightLevel: 1 }]
-                ]
-            },
-            {
-                title: TrophyTitleViewModel.INTERMEDIATE_EXOTIC,
-                grid: [
-                    [{ x: 0, y: 0, lightLevel: 2 }, { x: 0, y: 1, lightLevel: 2 }, { x: 0, y: 2, lightLevel: 2 }, { x: 0, y: 3, lightLevel: 2 }],
-                    [{ x: 1, y: 0, lightLevel: 2 }, { x: 1, y: 1, lightLevel: 2 }, { x: 1, y: 2, lightLevel: 2 }, { x: 1, y: 3, lightLevel: 2 }],
-                    [{ x: 2, y: 0, lightLevel: 2 }, { x: 2, y: 1, lightLevel: 2 }, { x: 2, y: 2, lightLevel: 2 }, { x: 2, y: 3, lightLevel: 2 }],
-                    [{ x: 3, y: 0, lightLevel: 2 }, { x: 3, y: 1, lightLevel: 2 }, { x: 3, y: 2, lightLevel: 2 }, { x: 3, y: 3, lightLevel: 2 }]
-                ]
-            }
+            createTrophy(TrophyTitleViewModel.BEGINNER, 3, 1, true),
+            createTrophy(TrophyTitleViewModel.INTERMEDIATE, 4, 1, false),
+            createTrophy(TrophyTitleViewModel.ADVANCED, 5, 1, false),
+            createTrophy(TrophyTitleViewModel.EXPERT, 6, 1, false),
+            createTrophy(TrophyTitleViewModel.MASTER, 7, 1, false),
+            createTrophy(TrophyTitleViewModel.BEGINNER_EXOTIC, 3, 2, false),
+            createTrophy(TrophyTitleViewModel.INTERMEDIATE_EXOTIC, 4, 2, true),
+            createTrophy(TrophyTitleViewModel.ADVANCED_EXOTIC, 5, 2, false),
+            createTrophy(TrophyTitleViewModel.EXPERT_EXOTIC, 6, 2, false),
+            createTrophy(TrophyTitleViewModel.MASTER_EXOTIC, 7, 2, false)
         ]);
     });
+
+    function createTrophy(title: TrophyTitleViewModel, size: number, lightLevel: number, unlocked: boolean) {
+        const grid = [];
+        for (let x = 0; x < size; x++) {
+            const row = [];
+            for (let y = 0; y < size; y++) {
+                row.push({ x, y, lightLevel });
+            }
+            grid.push(row);
+        }
+        return { title, grid, unlocked };
+    }
 });

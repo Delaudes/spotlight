@@ -1,4 +1,9 @@
-<div class="border border-cyan-400/20 rounded-2xl p-4 flex flex-col items-center justify-between gap-3 h-32">
+<div class="rounded-2xl p-4 flex flex-col items-center justify-between gap-3 h-32 transition-all"
+  [class.border-2]="trophy().unlocked"
+  [class.border-cyan-400]="trophy().unlocked"
+  [class.border]="!trophy().unlocked"
+  [class.border-cyan-400/20]="!trophy().unlocked"
+  [class.opacity-50]="!trophy().unlocked">
   <!-- Trophy Mini Grid (dots) -->
   <div class="flex flex-col gap-0.5 flex-1 justify-center">
     @for (row of trophy().grid; track $index) {
@@ -16,7 +21,13 @@
   </div>
   
   <!-- Trophy Title -->
-  <p class="text-cyan-400 text-center font-semibold text-xs" data-testid="trophy-title">
-    {{ trophy().title }}
-  </p>
+  @if (trophy().unlocked) {
+    <p class="text-cyan-400 text-center font-semibold text-xs" data-testid="trophy-title">
+      {{ trophy().title }}
+    </p>
+  } @else {
+    <span class="material-symbols-outlined text-gray-600 text-xl" data-testid="trophy-locked">
+      lock
+    </span>
+  }
 </div>

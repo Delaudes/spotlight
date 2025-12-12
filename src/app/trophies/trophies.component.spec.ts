@@ -4,7 +4,7 @@ import { ROUTER_SERVICE_TOKEN } from '../router/router.service';
 import { FakeStorageService } from '../storage/fake-storage.service';
 import { STORAGE_SERVICE_TOKEN } from '../storage/storage.service';
 import { TrophyTitleDomainModel } from './models/trophies.domain.model';
-import { TROPHIES_VIEW_MOCK } from './models/trophies.mock';
+import { TrophyTitleViewModel } from './models/trophies.view.model';
 import { TrophiesComponent } from './trophies.component';
 import { TrophyComponent } from './trophy/trophy.component';
 
@@ -50,15 +50,39 @@ describe('TrophiesComponent', () => {
         expect(router.lastNavigatedPath).toEqual('game');
     });
 
-    it('should have empty tophies', () => {
-        expect(spectator.query('[data-testid="empty"]')?.textContent).toContain("Aucun trophée débloqué pour le moment. Continuez à jouer pour en débloquer !")
-    });
 
     it('should have trophies', () => {
-        storage.setItem('trophies', Object.values(TrophyTitleDomainModel));
+        storage.setItem('trophies', [
+            TrophyTitleDomainModel.BEGINNER,
+            TrophyTitleDomainModel.INTERMEDIATE_EXOTIC
+        ]);
 
         spectator = createComponent();
 
-        expect((spectator.queryAll(TrophyComponent).map(c => c.trophy()))).toEqual(TROPHIES_VIEW_MOCK);
+        expect((spectator.queryAll(TrophyComponent).map(c => c.trophy()))).toEqual([
+            createTrophy(TrophyTitleViewModel.BEGINNER, 3, 1, true),
+            createTrophy(TrophyTitleViewModel.INTERMEDIATE, 4, 1, false),
+            createTrophy(TrophyTitleViewModel.ADVANCED, 5, 1, false),
+            createTrophy(TrophyTitleViewModel.EXPERT, 6, 1, false),
+            createTrophy(TrophyTitleViewModel.MASTER, 7, 1, false),
+            createTrophy(TrophyTitleViewModel.BEGINNER_EXOTIC, 3, 2, false),
+            createTrophy(TrophyTitleViewModel.INTERMEDIATE_EXOTIC, 4, 2, true),
+            createTrophy(TrophyTitleViewModel.ADVANCED_EXOTIC, 5, 2, false),
+            createTrophy(TrophyTitleViewModel.EXPERT_EXOTIC, 6, 2, false),
+            createTrophy(TrophyTitleViewModel.MASTER_EXOTIC, 7, 2, false)
+        ]);
     });
+
+    function createTrophy(title: TrophyTitleViewModel, size: number, lightLevel: number, unlocked: boolean) {
+        const grid = [];
+        for (let x = 0; x < size; x++) {
+            const row = [];
+            for (let y = 0; y < size; y++) {
+                row.push({ x, y, lightLevel });
+            }
+            grid.push(row);
+        }
+        return { title, grid, unlocked };
+    }
 });
+

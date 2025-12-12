@@ -18,10 +18,11 @@ export class TrophiesPresenter {
 
     constructor(private readonly view: TrophiesView) { }
 
-    presentTrophies(trophiesListDomain: TrophiesListDomainModel): void {
+    presentTrophies(trophiesListDomain: TrophiesListDomainModel, unlockedTitles: TrophyTitleDomainModel[]): void {
         this.view.update({
             trophies: trophiesListDomain.trophies.map(trophy => ({
                 title: this.titleViewByDomain[trophy.title],
+                unlocked: unlockedTitles.includes(trophy.title),
                 grid: trophy.grid.cells.map(row => row.map(cell => ({
                     x: cell.x,
                     y: cell.y,
