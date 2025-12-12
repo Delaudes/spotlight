@@ -3,7 +3,7 @@
 FR : Un jeu de puzzle minimaliste où vous devez allumer toutes les cellules d'une grille.
 EN : A minimalist puzzle game where you need to light up all the cells in a grid.
 
-FR :Vous pouvez jouer au jeu ici : https://delaudes.github.io/spotlight/
+FR : Vous pouvez jouer au jeu ici : https://delaudes.github.io/spotlight/
 EN : You can play the game here: https://delaudes.github.io/spotlight/
 
 # TODO
