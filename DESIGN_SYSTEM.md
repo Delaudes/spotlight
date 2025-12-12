@@ -192,7 +192,7 @@ Les cellules du jeu utilisent 3 niveaux de lumière pour représenter l'état du
 ### Navigation Responsive
 
 - **Mobile** : Barre de navigation fixe en bas de l'écran (`fixed bottom-0`)
-- **Desktop** : Boutons positionnés à côté du titre (`absolute left-0` / `right-0`)
+- **Desktop** : Boutons centrés dans le flux principal (`flex gap-4`)
 
 ## À Éviter
 
