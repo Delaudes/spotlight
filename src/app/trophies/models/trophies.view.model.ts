@@ -16,15 +16,15 @@ export interface TrophyViewModel {
 }
 
 export enum TrophyTitleViewModel {
-    BEGINNER = 'Débutant',
-    INTERMEDIATE = 'Intermédiaire',
-    ADVANCED = 'Avancé',
-    EXPERT = 'Expert',
-    MASTER = 'Maître',
-    BEGINNER_EXOTIC = 'Débutant Exotique',
-    INTERMEDIATE_EXOTIC = 'Intermédiaire Exotique',
-    ADVANCED_EXOTIC = 'Avancé Exotique',
-    EXPERT_EXOTIC = 'Expert Exotique',
-    MASTER_EXOTIC = 'Maître Exotique'
+    BEGINNER = 'Première Lueur 🐣',
+    INTERMEDIATE = 'Apprenti Lumineux 💡',
+    ADVANCED = 'Maître des Ombres ⚡',
+    EXPERT = 'Gardien de la Lumière 🌟',
+    MASTER = 'Seigneur des Photons 🔥',
+    BEGINNER_EXOTIC = 'Arc-en-Ciel Débutant 🌈',
+    INTERMEDIATE_EXOTIC = 'Artiste Coloré 🎨',
+    ADVANCED_EXOTIC = 'Licorne Lumineuse 🦄',
+    EXPERT_EXOTIC = 'Magicien de la Lumière 🎪',
+    MASTER_EXOTIC = 'Créateur d\'Univers 👑'
 }
 
