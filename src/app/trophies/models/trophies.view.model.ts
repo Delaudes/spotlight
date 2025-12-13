@@ -32,5 +32,15 @@ export enum TrophyTitleViewModel {
     BEGINNER_EXOTIC_BULLSEYE = 'Seul au Monde',
     ADVANCED_EXOTIC_BULLSEYE = 'Unique en son Genre',
     MASTER_EXOTIC_BULLSEYE = 'L\'Élu',
+    BEGINNER_FRAME = 'Popigaï',
+    INTERMEDIATE_FRAME = 'Chicxulub',
+    ADVANCED_FRAME = 'Bedout',
+    EXPERT_FRAME = 'Sudbury',
+    MASTER_FRAME = 'Vredefort',
+    BEGINNER_EXOTIC_FRAME = 'Hercule',
+    INTERMEDIATE_EXOTIC_FRAME = 'Baleine',
+    ADVANCED_EXOTIC_FRAME = 'Grande Ourse',
+    EXPERT_EXOTIC_FRAME = 'Vierge',
+    MASTER_EXOTIC_FRAME = 'Hydre',
 }
 

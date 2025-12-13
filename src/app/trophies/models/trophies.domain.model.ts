@@ -24,7 +24,17 @@ export enum TrophyTitleDomainModel {
     MASTER_BULLSEYE = 'MASTER_BULLSEYE',
     BEGINNER_EXOTIC_BULLSEYE = 'BEGINNER_EXOTIC_BULLSEYE',
     ADVANCED_EXOTIC_BULLSEYE = 'ADVANCED_EXOTIC_BULLSEYE',
-    MASTER_EXOTIC_BULLSEYE = 'MASTER_EXOTIC_BULLSEYE'
+    MASTER_EXOTIC_BULLSEYE = 'MASTER_EXOTIC_BULLSEYE',
+    BEGINNER_FRAME = 'BEGINNER_FRAME',
+    INTERMEDIATE_FRAME = 'INTERMEDIATE_FRAME',
+    ADVANCED_FRAME = 'ADVANCED_FRAME',
+    EXPERT_FRAME = 'EXPERT_FRAME',
+    MASTER_FRAME = 'MASTER_FRAME',
+    BEGINNER_EXOTIC_FRAME = 'BEGINNER_EXOTIC_FRAME',
+    INTERMEDIATE_EXOTIC_FRAME = 'INTERMEDIATE_EXOTIC_FRAME',
+    ADVANCED_EXOTIC_FRAME = 'ADVANCED_EXOTIC_FRAME',
+    EXPERT_EXOTIC_FRAME = 'EXPERT_EXOTIC_FRAME',
+    MASTER_EXOTIC_FRAME = 'MASTER_EXOTIC_FRAME'
 }
 
 
@@ -44,7 +54,17 @@ export const GRID_BY_TITLE: Record<TrophyTitleDomainModel, GridDomainModel> = {
     [TrophyTitleDomainModel.MASTER_BULLSEYE]: createBullseyeGrid(7, 1),
     [TrophyTitleDomainModel.BEGINNER_EXOTIC_BULLSEYE]: createBullseyeGrid(3, 2),
     [TrophyTitleDomainModel.ADVANCED_EXOTIC_BULLSEYE]: createBullseyeGrid(5, 2),
-    [TrophyTitleDomainModel.MASTER_EXOTIC_BULLSEYE]: createBullseyeGrid(7, 2)
+    [TrophyTitleDomainModel.MASTER_EXOTIC_BULLSEYE]: createBullseyeGrid(7, 2),
+    [TrophyTitleDomainModel.BEGINNER_FRAME]: createFrameGrid(3, 1),
+    [TrophyTitleDomainModel.INTERMEDIATE_FRAME]: createFrameGrid(4, 1),
+    [TrophyTitleDomainModel.ADVANCED_FRAME]: createFrameGrid(5, 1),
+    [TrophyTitleDomainModel.EXPERT_FRAME]: createFrameGrid(6, 1),
+    [TrophyTitleDomainModel.MASTER_FRAME]: createFrameGrid(7, 1),
+    [TrophyTitleDomainModel.BEGINNER_EXOTIC_FRAME]: createFrameGrid(3, 2),
+    [TrophyTitleDomainModel.INTERMEDIATE_EXOTIC_FRAME]: createFrameGrid(4, 2),
+    [TrophyTitleDomainModel.ADVANCED_EXOTIC_FRAME]: createFrameGrid(5, 2),
+    [TrophyTitleDomainModel.EXPERT_EXOTIC_FRAME]: createFrameGrid(6, 2),
+    [TrophyTitleDomainModel.MASTER_EXOTIC_FRAME]: createFrameGrid(7, 2)
 };
 
 
@@ -71,8 +91,21 @@ function createBullseyeGrid(size: number, cellMaxLevel: number): GridDomainModel
     for (let x = 0; x < size; x++) {
         const row = [];
         for (let y = 0; y < size; y++) {
-            // Le centre est allumé au maximum, tous les autres à 0
             const lightLevel = (x === center && y === center) ? cellMaxLevel : 0;
+            row.push(new CellDomainModel(x, y, lightLevel));
+        }
+        cells.push(row);
+    }
+    return new GridDomainModel(cells, cellMaxLevel);
+}
+
+function createFrameGrid(size: number, cellMaxLevel: number): GridDomainModel {
+    const cells = [];
+    for (let x = 0; x < size; x++) {
+        const row = [];
+        for (let y = 0; y < size; y++) {
+            const isEdge = x === 0 || x === size - 1 || y === 0 || y === size - 1;
+            const lightLevel = isEdge ? cellMaxLevel : 0;
             row.push(new CellDomainModel(x, y, lightLevel));
         }
         cells.push(row);

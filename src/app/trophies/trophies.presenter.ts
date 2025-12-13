@@ -19,7 +19,17 @@ export class TrophiesPresenter {
         [TrophyTitleDomainModel.MASTER_BULLSEYE]: TrophyTitleViewModel.MASTER_BULLSEYE,
         [TrophyTitleDomainModel.BEGINNER_EXOTIC_BULLSEYE]: TrophyTitleViewModel.BEGINNER_EXOTIC_BULLSEYE,
         [TrophyTitleDomainModel.ADVANCED_EXOTIC_BULLSEYE]: TrophyTitleViewModel.ADVANCED_EXOTIC_BULLSEYE,
-        [TrophyTitleDomainModel.MASTER_EXOTIC_BULLSEYE]: TrophyTitleViewModel.MASTER_EXOTIC_BULLSEYE
+        [TrophyTitleDomainModel.MASTER_EXOTIC_BULLSEYE]: TrophyTitleViewModel.MASTER_EXOTIC_BULLSEYE,
+        [TrophyTitleDomainModel.BEGINNER_FRAME]: TrophyTitleViewModel.BEGINNER_FRAME,
+        [TrophyTitleDomainModel.INTERMEDIATE_FRAME]: TrophyTitleViewModel.INTERMEDIATE_FRAME,
+        [TrophyTitleDomainModel.ADVANCED_FRAME]: TrophyTitleViewModel.ADVANCED_FRAME,
+        [TrophyTitleDomainModel.EXPERT_FRAME]: TrophyTitleViewModel.EXPERT_FRAME,
+        [TrophyTitleDomainModel.MASTER_FRAME]: TrophyTitleViewModel.MASTER_FRAME,
+        [TrophyTitleDomainModel.BEGINNER_EXOTIC_FRAME]: TrophyTitleViewModel.BEGINNER_EXOTIC_FRAME,
+        [TrophyTitleDomainModel.INTERMEDIATE_EXOTIC_FRAME]: TrophyTitleViewModel.INTERMEDIATE_EXOTIC_FRAME,
+        [TrophyTitleDomainModel.ADVANCED_EXOTIC_FRAME]: TrophyTitleViewModel.ADVANCED_EXOTIC_FRAME,
+        [TrophyTitleDomainModel.EXPERT_EXOTIC_FRAME]: TrophyTitleViewModel.EXPERT_EXOTIC_FRAME,
+        [TrophyTitleDomainModel.MASTER_EXOTIC_FRAME]: TrophyTitleViewModel.MASTER_EXOTIC_FRAME
     };
 
     constructor(private readonly view: TrophiesView) { }

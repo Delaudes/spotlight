@@ -41,7 +41,17 @@ describe('TrophiesService', () => {
             createBullseyeTrophy(TrophyTitleViewModel.MASTER_BULLSEYE, 7, 1, false),
             createBullseyeTrophy(TrophyTitleViewModel.BEGINNER_EXOTIC_BULLSEYE, 3, 2, false),
             createBullseyeTrophy(TrophyTitleViewModel.ADVANCED_EXOTIC_BULLSEYE, 5, 2, false),
-            createBullseyeTrophy(TrophyTitleViewModel.MASTER_EXOTIC_BULLSEYE, 7, 2, false)
+            createBullseyeTrophy(TrophyTitleViewModel.MASTER_EXOTIC_BULLSEYE, 7, 2, false),
+            createFrameTrophy(TrophyTitleViewModel.BEGINNER_FRAME, 3, 1, false),
+            createFrameTrophy(TrophyTitleViewModel.INTERMEDIATE_FRAME, 4, 1, false),
+            createFrameTrophy(TrophyTitleViewModel.ADVANCED_FRAME, 5, 1, false),
+            createFrameTrophy(TrophyTitleViewModel.EXPERT_FRAME, 6, 1, false),
+            createFrameTrophy(TrophyTitleViewModel.MASTER_FRAME, 7, 1, false),
+            createFrameTrophy(TrophyTitleViewModel.BEGINNER_EXOTIC_FRAME, 3, 2, false),
+            createFrameTrophy(TrophyTitleViewModel.INTERMEDIATE_EXOTIC_FRAME, 4, 2, false),
+            createFrameTrophy(TrophyTitleViewModel.ADVANCED_EXOTIC_FRAME, 5, 2, false),
+            createFrameTrophy(TrophyTitleViewModel.EXPERT_EXOTIC_FRAME, 6, 2, false),
+            createFrameTrophy(TrophyTitleViewModel.MASTER_EXOTIC_FRAME, 7, 2, false)
         ]);
     });
 
@@ -64,6 +74,20 @@ describe('TrophiesService', () => {
             const row = [];
             for (let y = 0; y < size; y++) {
                 const lightLevel = (x === center && y === center) ? cellMaxLevel : 0;
+                row.push({ x, y, lightLevel });
+            }
+            grid.push(row);
+        }
+        return { title, grid, unlocked };
+    }
+
+    function createFrameTrophy(title: TrophyTitleViewModel, size: number, cellMaxLevel: number, unlocked: boolean) {
+        const grid = [];
+        for (let x = 0; x < size; x++) {
+            const row = [];
+            for (let y = 0; y < size; y++) {
+                const isEdge = x === 0 || x === size - 1 || y === 0 || y === size - 1;
+                const lightLevel = isEdge ? cellMaxLevel : 0;
                 row.push({ x, y, lightLevel });
             }
             grid.push(row);

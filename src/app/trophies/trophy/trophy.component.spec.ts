@@ -29,7 +29,7 @@ describe('TrophyComponent', () => {
 
     it('should have title', () => {
         expect(spectator.query('[data-testid="trophy-title"]')?.textContent).toContain(spectator.component.trophy().title);
-        expect(spectator.query('[data-testid="trophy-lock"]')).toBeNull();
+        expect(spectator.query('[data-testid="trophy-locked"]')).toBeNull();
     });
 
     it('should have lock', () => {
@@ -44,6 +44,6 @@ describe('TrophyComponent', () => {
         });
 
         expect(spectator.query('[data-testid="trophy-title"]')).toBeNull();
-        expect(spectator.query('[data-testid="trophy-lock"]')).toBeDefined();
+        expect(spectator.query('[data-testid="trophy-locked"]')).toBeDefined();
     });
 });
