@@ -25,6 +25,12 @@ export enum TrophyTitleViewModel {
     INTERMEDIATE_EXOTIC = 'Maître Soufre',
     ADVANCED_EXOTIC = 'Major Manganèse',
     EXPERT_EXOTIC = 'Enseigne Krypton',
-    MASTER_EXOTIC = 'Amiral Indium'
+    MASTER_EXOTIC = 'Amiral Indium',
+    BEGINNER_BULLSEYE = 'Dans le Mille',
+    ADVANCED_BULLSEYE = 'Pile Poil',
+    MASTER_BULLSEYE = 'Au Millimètre Près',
+    BEGINNER_EXOTIC_BULLSEYE = 'Seul au Monde',
+    ADVANCED_EXOTIC_BULLSEYE = 'Unique en son Genre',
+    MASTER_EXOTIC_BULLSEYE = 'L\'Élu',
 }
 

@@ -13,7 +13,13 @@ export class TrophiesPresenter {
         [TrophyTitleDomainModel.INTERMEDIATE_EXOTIC]: TrophyTitleViewModel.INTERMEDIATE_EXOTIC,
         [TrophyTitleDomainModel.ADVANCED_EXOTIC]: TrophyTitleViewModel.ADVANCED_EXOTIC,
         [TrophyTitleDomainModel.EXPERT_EXOTIC]: TrophyTitleViewModel.EXPERT_EXOTIC,
-        [TrophyTitleDomainModel.MASTER_EXOTIC]: TrophyTitleViewModel.MASTER_EXOTIC
+        [TrophyTitleDomainModel.MASTER_EXOTIC]: TrophyTitleViewModel.MASTER_EXOTIC,
+        [TrophyTitleDomainModel.BEGINNER_BULLSEYE]: TrophyTitleViewModel.BEGINNER_BULLSEYE,
+        [TrophyTitleDomainModel.ADVANCED_BULLSEYE]: TrophyTitleViewModel.ADVANCED_BULLSEYE,
+        [TrophyTitleDomainModel.MASTER_BULLSEYE]: TrophyTitleViewModel.MASTER_BULLSEYE,
+        [TrophyTitleDomainModel.BEGINNER_EXOTIC_BULLSEYE]: TrophyTitleViewModel.BEGINNER_EXOTIC_BULLSEYE,
+        [TrophyTitleDomainModel.ADVANCED_EXOTIC_BULLSEYE]: TrophyTitleViewModel.ADVANCED_EXOTIC_BULLSEYE,
+        [TrophyTitleDomainModel.MASTER_EXOTIC_BULLSEYE]: TrophyTitleViewModel.MASTER_EXOTIC_BULLSEYE
     };
 
     constructor(private readonly view: TrophiesView) { }
